@@ -32,6 +32,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-jest": "^23.0.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3",
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-template-compiler": "^2.5.21",
