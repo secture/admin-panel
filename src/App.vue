@@ -12,7 +12,7 @@
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
