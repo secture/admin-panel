@@ -1,7 +1,7 @@
 <template>
-  <v-toolbar flat dark>
+  <v-toolbar flat dark class="primary_dark">
     <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>{{title}}</v-toolbar-title>
+    <v-toolbar-title>{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat>Link One</v-btn>

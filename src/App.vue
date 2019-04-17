@@ -7,11 +7,6 @@
     </v-content>
   </v-app>
 </template>
-
-<style lang="scss">
-@import '@/styles/global.scss';
-</style>
-
 <script>
 import ToolBar from '@/components/ToolBar'
 import SideBar from '@/components/SideBar'
@@ -29,3 +24,6 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+@import '@/styles/global.scss';
+</style>

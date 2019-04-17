@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer absolute dark>
+  <v-navigation-drawer absolute dark class="primary_dark">
     <v-list dense class="pt-0">
       <hr class="v-divider theme--dark">
 
