@@ -10,6 +10,7 @@
 
 <script>
 import ToolBar from '@/components/ToolBar'
+import SideBar from '@/components/SideBar'
 
 export default {
   name: 'App',
