@@ -67,7 +67,7 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+<style>
 .v-navigation-drawer {
   padding-top: 64px;
 }
