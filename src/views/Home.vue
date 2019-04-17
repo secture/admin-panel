@@ -1,5 +1,7 @@
 <template>
-  <span>s</span>
+  <section>
+    <span>Home Admin</span>
+  </section>
 </template>
 
 <script>

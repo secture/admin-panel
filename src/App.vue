@@ -26,4 +26,8 @@ export default {
 </script>
 <style lang="scss">
 @import '@/styles/global.scss';
+
+.v-content {
+  padding-left: 300px !important;
+}
 </style>

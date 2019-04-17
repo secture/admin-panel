@@ -1,8 +1,15 @@
 <template>
   <v-navigation-drawer absolute dark class="primary_dark">
-    <v-list dense class="pt-0">
+    <v-list class="pt-0">
+      <v-list-tile class="banner">
+        <v-avatar class="secondary">
+          <span class="white--text headline">F</span>
+        </v-avatar>
+        <v-list-tile-content class="banner-title">
+          <v-list-tile-title>Admin Fantasy LaLiga</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <hr class="v-divider theme--dark">
-
       <v-list-tile v-for="item in items" :key="item.title">
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
@@ -67,9 +74,17 @@ export default {
   },
 }
 </script>
-<style>
-.v-navigation-drawer {
-  padding-top: 64px;
+
+<style lang="scss">
+hr {
+  margin: 0 auto;
+  width: calc(100% - 60px);
+  margin-bottom: 12px;
+}
+.banner {
+  padding: 8px;
+  .banner-title {
+    padding: 0 12px 0 12px;
+  }
 }
 </style>
-
