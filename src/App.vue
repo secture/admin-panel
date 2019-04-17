@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <ToolBar></ToolBar>
+    <SideBar></SideBar>
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -13,6 +14,7 @@ import ToolBar from '@/components/ToolBar'
 export default {
   name: 'App',
   components: {
+    SideBar,
     ToolBar,
   },
   data() {
