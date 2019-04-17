@@ -10,7 +10,7 @@
         <span class="mr-2">Latest Release</span>
       </v-btn>
     </v-toolbar>
-
+    <SideBar></SideBar>
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -19,11 +19,13 @@
 
 <script>
 import HelloWorld from './components/HelloWorld'
+import SideBar from '@/components/SideBar'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
+    SideBar,
   },
   data() {
     return {
