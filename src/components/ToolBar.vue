@@ -5,7 +5,19 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat>
-        <v-icon v-text="'account_circle'"></v-icon>
+        <v-flex>
+          <v-avatar size="32px" class="ma-1">
+            <img
+              v-if="userLoged"
+              src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+              alt="Avatar"
+            >
+            <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
+          </v-avatar>
+        </v-flex>
+        <v-flex>
+          <strong v-html="email"></strong>
+        </v-flex>
       </v-btn>
       <v-btn flat to="/login">
         <span>Login</span>
@@ -15,12 +27,21 @@
 </template>
 
 <script>
+import { mapGetters } from '@/store/modules/auth'
+import * as authGet from '@/store/modules/auth/getters'
+
 export default {
   name: 'ToolBar',
   data() {
     return {
       title: 'PANELADMIN',
     }
+  },
+  computed: {
+    ...mapGetters({
+      email: authGet.GET_EMAIL,
+      userLoged: authGet.GET_LOGIN,
+    }),
   },
 }
 </script>
