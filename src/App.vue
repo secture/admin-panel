@@ -17,6 +17,10 @@ export default {
 <style lang="scss">
 @import '@/styles/global.scss';
 
+.v-content {
+  padding-left: 300px !important;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
