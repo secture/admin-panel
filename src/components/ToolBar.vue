@@ -7,7 +7,7 @@
       <v-btn flat>
         <v-icon v-text="'account_circle'"></v-icon>
       </v-btn>
-      <v-btn flat :to="{ name: 'login'}">
+      <v-btn flat to="/login">
         <span>Login</span>
       </v-btn>
     </v-toolbar-items>
