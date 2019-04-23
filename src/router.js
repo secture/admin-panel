@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -10,8 +9,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'Home',
+      meta: { layout: 'home-layout' },
+      component: require('@/components/HomeContent.vue').default,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      meta: { layout: 'login-layout' },
+      component: () => import('@/components/LoginForm.vue'),
     },
   ],
 })

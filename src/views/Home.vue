@@ -1,9 +1,21 @@
 <template>
-  <section>
-    <span>Home Admin</span>
-  </section>
+  <v-app>
+    <ToolBar></ToolBar>
+    <SideBar></SideBar>
+    <v-content>
+      <slot></slot>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-export default {}
+import ToolBar from '@/components/ToolBar'
+import SideBar from '@/components/SideBar'
+
+export default {
+  components: {
+    SideBar,
+    ToolBar,
+  },
+}
 </script>

@@ -1,26 +1,16 @@
 <template>
-  <v-app>
-    <ToolBar></ToolBar>
-    <SideBar></SideBar>
-    <v-content>
+  <transition name="fade" mode="out-in">
+    <component :is="layout">
       <router-view></router-view>
-    </v-content>
-  </v-app>
+    </component>
+  </transition>
 </template>
 <script>
-import ToolBar from '@/components/ToolBar'
-import SideBar from '@/components/SideBar'
-
 export default {
-  name: 'App',
-  components: {
-    SideBar,
-    ToolBar,
-  },
-  data() {
-    return {
-      //
-    }
+  computed: {
+    layout() {
+      return this.$route.meta.layout
+    },
   },
 }
 </script>
@@ -29,5 +19,17 @@ export default {
 
 .v-content {
   padding-left: 300px !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
