@@ -5,13 +5,13 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 
-import Login from '@/views/Login'
-import Home from '@/views/Home'
+import Dashboard from '@/layouts/Dashboard'
+import Default from '@/layouts/Default'
 
 Vue.config.productionTip = false
 
-Vue.component('login-layout', Login)
-Vue.component('home-layout', Home)
+Vue.component('dashboard-layout', Dashboard)
+Vue.component('default-layout', Default)
 
 new Vue({
   router,

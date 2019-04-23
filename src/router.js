@@ -10,14 +10,14 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      meta: { layout: 'home-layout' },
-      component: require('@/components/HomeContent.vue').default,
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/Home.vue').default,
     },
     {
       path: '/login',
       name: 'Login',
-      meta: { layout: 'login-layout' },
-      component: () => import('@/components/LoginForm.vue'),
+      meta: { layout: 'default-layout' },
+      component: () => import('@/views/Login.vue'),
     },
   ],
 })
