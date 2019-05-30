@@ -8,6 +8,12 @@ import './registerServiceWorker'
 import Dashboard from '@/layouts/Dashboard'
 import Default from '@/layouts/Default'
 
+import Amplify, * as AmplifyModules from 'aws-amplify'
+import CognitoConfig from '@/api/cognito/config'
+
+Amplify.configure(CognitoConfig)
+Vue.use(AmplifyModules)
+
 Vue.config.productionTip = false
 
 Vue.component('dashboard-layout', Dashboard)

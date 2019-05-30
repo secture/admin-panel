@@ -19,16 +19,18 @@
           <strong v-html="email"></strong>
         </v-flex>
       </v-btn>
-      <v-btn flat to="/login">
-        <span>Login</span>
+      <v-btn flat @click="signOut()">
+        <span>Logout</span>
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
-import { mapGetters } from '@/store/modules/auth'
+import { mapGetters, mapActions } from '@/store/modules/auth'
 import * as authGet from '@/store/modules/auth/getters'
+import * as actions from '@/store/modules/auth/types'
+import router from '@/router'
 
 export default {
   name: 'ToolBar',
@@ -42,6 +44,15 @@ export default {
       email: authGet.GET_EMAIL,
       userLoged: authGet.GET_LOGIN,
     }),
+  },
+  methods: {
+    ...mapActions({
+      signOutUser: actions.LOGOUT,
+    }),
+    signOut() {
+      this.signOutUser()
+      router.push({ path: '/login' })
+    },
   },
 }
 </script>

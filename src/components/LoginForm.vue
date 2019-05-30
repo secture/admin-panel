@@ -33,6 +33,7 @@
           required
         ></v-text-field>
       </form>
+      <router-link to="/reset-password">He olvidado la contraseña</router-link>
     </v-card-text>
     <v-card-actions class="pa-3">
       <v-btn @click="clear" flat large>back</v-btn>
@@ -45,6 +46,7 @@
 <script>
 import { mapActions } from '@/store/modules/auth'
 import * as actions from '@/store/modules/auth/types'
+import router from '@/router'
 
 export default {
   $_veeValidate: {
@@ -65,11 +67,14 @@ export default {
   methods: {
     ...mapActions({
       loginUser: actions.LOGIN,
+      cognitoInfo: actions.SETCOGNITOINFO,
     }),
     submit() {
       if (this.$validator.validateAll()) {
-        this.loginUser(this.user)
-        this.$router.push({ name: 'Home' })
+        this.loginUser(this.user).then(cognitoUser => {
+          this.cognitoInfo(cognitoUser)
+          router.push({ path: '/' })
+        })
       }
     },
     clear() {
