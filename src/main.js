@@ -17,11 +17,6 @@ Vue.use(AmplifyModules)
 
 Vue.config.productionTip = false
 
-// create global international filter
-Vue.filter('translate', function(value) {
-  return i18n.t(value)
-})
-
 Vue.component('dashboard-layout', Dashboard)
 Vue.component('default-layout', Default)
 

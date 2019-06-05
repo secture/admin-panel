@@ -1,7 +1,7 @@
 <template>
   <v-card class="elevation-12">
     <v-toolbar dark color="primary">
-      <v-toolbar-title>{{'login' | translate}}</v-toolbar-title>
+      <v-toolbar-title>{{$t('login')}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
@@ -9,7 +9,7 @@
             <v-icon large>refresh</v-icon>
           </v-btn>
         </template>
-        <span>Refresh Form</span>
+        <span>{{$t('refresh')}}</span>
       </v-tooltip>
     </v-toolbar>
     <v-card-text>
@@ -19,7 +19,7 @@
           v-model="user.email"
           v-validate="'required|email'"
           :error-messages="errors.collect('email')"
-          label="E-mail"
+          v-bind:label="$t('email')"
           data-vv-name="email"
           required
         ></v-text-field>
@@ -28,17 +28,17 @@
           v-model="user.password"
           v-validate="'required|min:6|max:35'"
           :error-messages="errors.collect('password')"
-          label="Password"
+          v-bind:label="$t('password')"
           data-vv-name="password"
           required
         ></v-text-field>
       </form>
-      <router-link to="/reset-password">He olvidado la contraseña</router-link>
+      <router-link to="/reset-password">{{$t('forgot_password')}}</router-link>
     </v-card-text>
     <v-card-actions class="pa-3">
-      <v-btn @click="clear" flat large>back</v-btn>
+      <v-btn @click="clear" flat large>{{$t('back')}}</v-btn>
       <v-spacer></v-spacer>
-      <v-btn @click="submit" large color="secondary">submit</v-btn>
+      <v-btn @click="submit" large color="secondary">{{$t('submit')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
