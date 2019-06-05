@@ -16,7 +16,7 @@
       <form>
         <v-text-field
           class="pt-4"
-          v-model="email"
+          v-model="user.email"
           v-validate="'required|email'"
           :error-messages="errors.collect('email')"
           label="E-mail"
@@ -25,14 +25,15 @@
         ></v-text-field>
         <v-text-field
           class="pt-4"
-          v-model="password"
-          v-validate="'required|password'"
+          v-model="user.password"
+          v-validate="'required|min:6|max:35'"
           :error-messages="errors.collect('password')"
           label="Password"
           data-vv-name="password"
           required
         ></v-text-field>
       </form>
+      <router-link to="/reset-password">He olvidado la contraseña</router-link>
     </v-card-text>
     <v-card-actions class="pa-3">
       <v-btn @click="clear" flat large>back</v-btn>
@@ -43,28 +44,42 @@
 </template>
 
 <script>
+import { mapActions } from '@/store/modules/auth'
+import * as actions from '@/store/modules/auth/types'
+import router from '@/router'
+
 export default {
   $_veeValidate: {
     validator: 'new',
   },
   data: () => ({
-    email: '',
-    password: '',
+    user: {
+      email: '',
+      password: '',
+    },
     dictionary: {
       attributes: {
         email: 'E-mail Address',
         password: 'Password',
-        // custom attributes
       },
     },
   }),
   methods: {
+    ...mapActions({
+      loginUser: actions.LOGIN,
+      cognitoInfo: actions.SETCOGNITOINFO,
+    }),
     submit() {
-      this.$validator.validateAll()
+      if (this.$validator.validateAll()) {
+        this.loginUser(this.user).then(cognitoUser => {
+          this.cognitoInfo(cognitoUser)
+          router.push({ path: '/' })
+        })
+      }
     },
     clear() {
-      this.password = ''
-      this.email = ''
+      this.user.password = ''
+      this.user.email = ''
       this.$validator.reset()
     },
   },

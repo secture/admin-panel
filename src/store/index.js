@@ -6,6 +6,9 @@ import getters from './getters'
 import mutations from './mutations'
 import state from './state'
 
+//modules
+import authModule from './modules/auth'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,5 +16,7 @@ export default new Vuex.Store({
   getters,
   actions,
   mutations,
-  modules: {},
+  modules: {
+    auth: authModule,
+  },
 })

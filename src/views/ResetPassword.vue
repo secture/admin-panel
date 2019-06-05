@@ -2,18 +2,18 @@
   <v-container fluid fill-height primary_light>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
-        <login-form></login-form>
+        <reset-password-form></reset-password-form>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import LoginForm from '@/components/LoginForm'
+import ResetPasswordForm from '@/components/ResetPasswordForm'
 
 export default {
   components: {
-    LoginForm,
+    ResetPasswordForm,
   },
 }
 </script>
