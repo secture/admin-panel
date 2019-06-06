@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import { i18n } from '@/plugins/i18n/main'
 
 import Dashboard from '@/layouts/Dashboard'
 import Default from '@/layouts/Default'
@@ -22,5 +23,6 @@ Vue.component('default-layout', Default)
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App),
 }).$mount('#app')

@@ -1,7 +1,7 @@
 <template>
   <v-card class="elevation-12">
     <v-toolbar dark color="primary">
-      <v-toolbar-title>Recover Password</v-toolbar-title>
+      <v-toolbar-title>{{$t('form.titleResetPassword')}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
@@ -9,19 +9,41 @@
             <v-icon large>refresh</v-icon>
           </v-btn>
         </template>
-        <span>Refresh Form</span>
+        <span>{{$t('form.refresh')}}</span>
       </v-tooltip>
     </v-toolbar>
     <v-card-text>
-      <v-text-field class="pt-4" v-model="user.email" label="E-mail" required></v-text-field>
-      <v-text-field v-if="reset" class="pt-4" v-model="user.code" label="code" required></v-text-field>
-      <v-text-field v-if="reset" class="pt-4" v-model="user.newPassword" label="password" required></v-text-field>
+      <v-text-field class="pt-4" v-model="user.email" :label="$t('form.email')" required></v-text-field>
+      <v-text-field
+        v-if="reset"
+        class="pt-4"
+        v-model="user.code"
+        :label="$t('form.email')"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-if="reset"
+        class="pt-4"
+        v-model="user.newPassword"
+        :label="$t('form.password')"
+        required
+      ></v-text-field>
     </v-card-text>
     <v-card-actions class="pa-3">
-      <v-btn @click="clear" flat large>back</v-btn>
+      <v-btn @click="backTo()" flat large>{{$t('form.back')}}</v-btn>
       <v-spacer></v-spacer>
-      <v-btn v-if="reset === false" @click="forgotPassword()" large color="secondary">forgot</v-btn>
-      <v-btn v-if="reset === true" @click="resetPassword()" large color="secondary">reset</v-btn>
+      <v-btn
+        v-if="reset === false"
+        @click="forgotPassword()"
+        large
+        color="secondary"
+      >{{$t('form.submit')}}</v-btn>
+      <v-btn
+        v-if="reset === true"
+        @click="resetPassword()"
+        large
+        color="secondary"
+      >{{$t('form.reset')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -78,6 +100,9 @@ export default {
     },
     clear() {
       this.user.email = ''
+    },
+    backTo() {
+      router.push({ path: '/login' })
     },
   },
 }
