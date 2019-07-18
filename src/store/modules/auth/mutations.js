@@ -1,4 +1,4 @@
-import * as auth from './types'
+import * as auth from '@/store/modules/auth/types'
 
 export default {
   [auth.LOGIN](state, user) {

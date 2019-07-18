@@ -8,6 +8,7 @@ import state from './state'
 
 //modules
 import authModule from './modules/auth'
+import coreModule from './modules/core'
 
 Vue.use(Vuex)
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
   mutations,
   modules: {
     auth: authModule,
+    core: coreModule,
   },
 })

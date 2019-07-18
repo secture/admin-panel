@@ -12,6 +12,9 @@ export const messages = {
       reset: 'Reset password',
       code: 'Verification code',
     },
+    actions: {
+      close: 'Close',
+    },
     flags: {
       es: '🇪🇸',
       en: '🇺🇸',
@@ -29,6 +32,9 @@ export const messages = {
       refresh: 'Limpiar formulario',
       reset: 'Cambiar contraseña',
       code: 'Código de verificación',
+    },
+    actions: {
+      close: 'Cerrar',
     },
     flags: {
       es: '🇪🇸',

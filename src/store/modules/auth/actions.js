@@ -1,40 +1,40 @@
-import * as actions from '@/store/modules/auth/types'
+import * as auth from '@/store/modules/auth/types'
 import UserService from '@/api/cognito/userService'
 
 export default {
-  async [actions.LOGIN]({ commit }, user) {
+  async [auth.LOGIN]({ commit }, user) {
     try {
       const response = await UserService.signIn(user)
-      commit(actions.LOGIN, user)
+      commit(auth.LOGIN, user)
       return response
     } catch (error) {
       console.log(error)
     }
   },
-  async [actions.LOGOUT]({ commit }) {
+  async [auth.LOGOUT]({ commit }) {
     try {
       const response = await UserService.signOut()
       console.log(response)
-      commit(actions.LOGOUT)
+      commit(auth.LOGOUT)
     } catch (error) {
       console.log(error)
     }
   },
-  [actions.SETCOGNITOINFO]({ commit }, cognitoInfo) {
-    commit(actions.SETCOGNITOINFO, cognitoInfo)
+  [auth.SETCOGNITOINFO]({ commit }, cognitoInfo) {
+    commit(auth.SETCOGNITOINFO, cognitoInfo)
   },
-  async [actions.FORGOT_PASSWORD]({ commit }, email) {
+  async [auth.FORGOT_PASSWORD]({ commit }, email) {
     try {
       const response = await UserService.forgotPassword(email)
       if (response !== null) {
-        commit(actions.RESET_PASSWORD_OK, true)
+        commit(auth.RESET_PASSWORD_OK, true)
       }
     } catch (error) {
       console.log(error)
-      commit(actions.RESET_PASSWORD_OK, false)
+      commit(auth.RESET_PASSWORD_OK, false)
     }
   },
-  async [actions.RESET_PASSWORD]({ commit }, user) {
+  async [auth.RESET_PASSWORD]({ commit }, user) {
     try {
       const response = await UserService.resetPassword(
         user.email,
@@ -42,19 +42,19 @@ export default {
         user.newPassword
       )
       if (response === true) {
-        commit(actions.RESET_PASSWORD_OK, false)
+        commit(auth.RESET_PASSWORD_OK, false)
         return true
       }
     } catch (error) {
       console.log(error)
-      commit(actions.RESET_PASSWORD_OK, false)
+      commit(auth.RESET_PASSWORD_OK, false)
       return false
     }
   },
-  [actions.SETLOGGEDIN]({ commit }, loggedIn) {
-    commit(actions.SETLOGGEDIN, loggedIn)
+  [auth.SETLOGGEDIN]({ commit }, loggedIn) {
+    commit(auth.SETLOGGEDIN, loggedIn)
   },
-  [actions.SETLOGGEDOUT]({ commit }, loggedOut) {
-    commit(actions.SETLOGGEDOUT, loggedOut)
+  [auth.SETLOGGEDOUT]({ commit }, loggedOut) {
+    commit(auth.SETLOGGEDOUT, loggedOut)
   },
 }

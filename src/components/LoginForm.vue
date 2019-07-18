@@ -36,6 +36,7 @@
       <router-link to="/reset-password">{{$t('form.forgot_password')}}</router-link>
     </v-card-text>
     <v-card-actions class="pa-3">
+      <v-btn block color="primary" dark @click="showSnackBar(true)">Show Snackbar</v-btn>
       <v-spacer></v-spacer>
       <v-btn @click="submit" large color="secondary">{{$t('form.submit')}}</v-btn>
     </v-card-actions>
@@ -43,8 +44,10 @@
 </template>
 
 <script>
-import { mapActions } from '@/store/modules/auth'
-import * as actions from '@/store/modules/auth/types'
+import { mapActions as mapActionsAuth } from '@/store/modules/auth'
+import { mapActions as mapActionsCore } from '@/store/modules/core'
+import * as auth from '@/store/modules/auth/types'
+import * as core from '@/store/modules/core/types'
 import router from '@/router'
 
 export default {
@@ -64,9 +67,12 @@ export default {
     },
   }),
   methods: {
-    ...mapActions({
-      loginUser: actions.LOGIN,
-      cognitoInfo: actions.SETCOGNITOINFO,
+    ...mapActionsAuth({
+      loginUser: auth.LOGIN,
+      cognitoInfo: auth.SETCOGNITOINFO,
+    }),
+    ...mapActionsCore({
+      snackBar: core.SHOW_TOASTER,
     }),
     submit() {
       if (this.$validator.validateAll()) {
@@ -80,6 +86,10 @@ export default {
       this.user.password = ''
       this.user.email = ''
       this.$validator.reset()
+    },
+    showSnackBar(show) {
+      console.log(this.$store)
+      this.snackBar(show)
     },
   },
 }
