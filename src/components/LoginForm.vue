@@ -26,14 +26,17 @@
         <v-text-field
           class="pt-4"
           v-model="user.password"
-          v-validate="'required|min:6|max:35'"
-          :error-messages="errors.collect('password')"
+          :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+          :rules="[rules.required, rules.min]"
+          :type="showPassword ? 'text' : 'password'"
           :label="$t('form.password')"
-          data-vv-name="password"
-          required
+          hint="la contraseña cumple las restricciones"
+          @click:append="showPassword = !showPassword"
         ></v-text-field>
       </form>
-      <router-link to="/reset-password">{{$t('form.forgot_password')}}</router-link>
+      <div class="reset-password">
+        <router-link to="/reset-password">{{$t('form.forgot_password')}}</router-link>
+      </div>
     </v-card-text>
     <v-card-actions class="pa-3">
       <v-spacer></v-spacer>
@@ -44,9 +47,7 @@
 
 <script>
 import { mapActions as mapActionsAuth } from '@/store/modules/auth'
-import { mapActions as mapActionsCore } from '@/store/modules/core'
 import * as auth from '@/store/modules/auth/types'
-import * as core from '@/store/modules/core/types'
 import router from '@/router'
 
 export default {
@@ -63,6 +64,11 @@ export default {
         email: 'E-mail Address',
         password: 'Password',
       },
+    },
+    showPassword: false,
+    rules: {
+      required: value => !!value || 'Required.',
+      min: v => v.length >= 8 || 'Min 8 characters',
     },
   }),
   methods: {
@@ -91,5 +97,8 @@ export default {
 <style lang="scss">
 .card-form {
   width: 100%;
+}
+.reset-password {
+  margin-top: 15px;
 }
 </style>
