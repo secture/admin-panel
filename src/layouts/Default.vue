@@ -2,7 +2,7 @@
   <v-app>
     <slot></slot>
     <LanguageButton></LanguageButton>
-    <SnackBar type="warning" text="Texto de prueba"></SnackBar>
+    <SnackBar></SnackBar>
   </v-app>
 </template>
 

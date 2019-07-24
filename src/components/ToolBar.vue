@@ -11,8 +11,8 @@
               v-if="userLoged"
               src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
               alt="Avatar"
-            >
-            <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
+            />
+            <!--<v-icon v-else :color="message.color" v-text="message.icon"></v-icon>-->
           </v-avatar>
         </v-flex>
         <v-flex>

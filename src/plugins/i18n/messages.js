@@ -19,6 +19,22 @@ export const messages = {
       es: '🇪🇸',
       en: '🇺🇸',
     },
+    errors: {
+      UserNotFoundException: 'User does not exist',
+      NotAuthorizedException: 'Incorrect username or password.',
+      UserNotFoundException: 'Username/client id combination not found.',
+      CodeMissmatchException: 'User code verification is not correct',
+      InvalidPasswordException:
+        'Password does not conform to policy: Password must have symbol characters',
+    },
+    success: {
+      UserLogin: 'Success user logged',
+      ResetPassword: 'Success changed password',
+    },
+    info: {
+      CheckEmailCode:
+        'You have been sent a code via email to reset your password',
+    },
   },
   es: {
     form: {
@@ -39,6 +55,22 @@ export const messages = {
     flags: {
       es: '🇪🇸',
       en: '🇺🇸',
+    },
+    errors: {
+      UserNotFoundException: 'El usuario no existe',
+      NotAuthorizedException: 'Nombre de usuario o password incorrectas',
+      UserNotFoundException: 'nombre de usuario incorrecto',
+      CodeMissmatchException: 'El codigo de verificación no es correcto',
+      InvalidPasswordException:
+        'La password no es correcta: Debe contener al menos un caracter',
+    },
+    success: {
+      UserLogin: 'Usuario logeado con éxito',
+      ResetPassword: 'Password modificada con éxito',
+    },
+    info: {
+      CheckEmailCode:
+        'Se le ha enviado un código vía email para reestablecer su contraseña',
     },
   },
 }

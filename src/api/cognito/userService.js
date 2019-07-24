@@ -1,18 +1,26 @@
 import { Auth } from 'aws-amplify'
 
+import MessageService from '@/services/messageServices'
+
 const UserService = {
   signIn: async function(user) {
     const username = user.email
     const password = user.password
+    let userCognito = null
     try {
-      const userCognito = await Auth.signIn({
+      userCognito = await Auth.signIn({
         username,
         password,
       })
-      return userCognito
     } catch (error) {
       console.log(error)
+      MessageService.dispatchError(
+        error,
+        'core/SHOW_TOASTER_MESSAGE',
+        'errors.'
+      )
     }
+    return userCognito
   },
   signOut: async function() {
     try {
@@ -26,10 +34,15 @@ const UserService = {
   forgotPassword: async function(userName) {
     try {
       const response = await Auth.forgotPassword(userName)
+      debugger
       return response
     } catch (error) {
       console.log(error)
-      return null
+      MessageService.dispatchError(
+        error,
+        'core/SHOW_TOASTER_MESSAGE',
+        'errors.'
+      )
     }
   },
   resetPassword: async function(userName, code, newPassword) {
@@ -37,8 +50,11 @@ const UserService = {
       await Auth.forgotPasswordSubmit(userName, code, newPassword)
       return true
     } catch (error) {
-      console.log(error)
-      return null
+      MessageService.dispatchError(
+        error,
+        'core/SHOW_TOASTER_MESSAGE',
+        'errors.'
+      )
     }
   },
   getCurrentAuthenticatedUser: async function() {

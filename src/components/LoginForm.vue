@@ -36,7 +36,6 @@
       <router-link to="/reset-password">{{$t('form.forgot_password')}}</router-link>
     </v-card-text>
     <v-card-actions class="pa-3">
-      <v-btn block color="primary" dark @click="showSnackBar(true)">Show Snackbar</v-btn>
       <v-spacer></v-spacer>
       <v-btn @click="submit" large color="secondary">{{$t('form.submit')}}</v-btn>
     </v-card-actions>
@@ -69,16 +68,14 @@ export default {
   methods: {
     ...mapActionsAuth({
       loginUser: auth.LOGIN,
-      cognitoInfo: auth.SETCOGNITOINFO,
-    }),
-    ...mapActionsCore({
-      snackBar: core.SHOW_TOASTER,
+      cognitoUser: auth.SETCOGNITOUSER,
     }),
     submit() {
       if (this.$validator.validateAll()) {
         this.loginUser(this.user).then(cognitoUser => {
-          this.cognitoInfo(cognitoUser)
-          router.push({ path: '/' })
+          if (cognitoUser !== null) {
+            router.push({ path: '/' })
+          }
         })
       }
     },
@@ -86,10 +83,6 @@ export default {
       this.user.password = ''
       this.user.email = ''
       this.$validator.reset()
-    },
-    showSnackBar(show) {
-      console.log(this.$store)
-      this.snackBar(show)
     },
   },
 }

@@ -14,13 +14,7 @@
     </v-toolbar>
     <v-card-text>
       <v-text-field class="pt-4" v-model="user.email" :label="$t('form.email')" required></v-text-field>
-      <v-text-field
-        v-if="reset"
-        class="pt-4"
-        v-model="user.code"
-        :label="$t('form.email')"
-        required
-      ></v-text-field>
+      <v-text-field v-if="reset" class="pt-4" v-model="user.code" :label="$t('form.code')" required></v-text-field>
       <v-text-field
         v-if="reset"
         class="pt-4"
@@ -81,7 +75,6 @@ export default {
       if (this.validateData() === true) {
         this.resetPasswordCognito(this.user).then(resetPassword => {
           if (resetPassword === true) {
-            console.log('La password ha sido cambiada')
             router.push({ path: '/login' })
           }
         })

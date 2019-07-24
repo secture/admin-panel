@@ -1,15 +1,20 @@
 import * as auth from '@/store/modules/auth/types'
 import UserService from '@/api/cognito/userService'
+import MessageService from '@/services/messageServices'
 
 export default {
   async [auth.LOGIN]({ commit }, user) {
-    try {
-      const response = await UserService.signIn(user)
+    const userCognito = await UserService.signIn(user)
+    if (userCognito !== null && typeof userCognito !== 'undefined') {
+      commit(auth.SETCOGNITOUSER, userCognito)
       commit(auth.LOGIN, user)
-      return response
-    } catch (error) {
-      console.log(error)
+      MessageService.dispatchSuccess(
+        'UserLogin',
+        'core/SHOW_TOASTER_MESSAGE',
+        'success.'
+      )
     }
+    return userCognito
   },
   async [auth.LOGOUT]({ commit }) {
     try {
@@ -20,14 +25,19 @@ export default {
       console.log(error)
     }
   },
-  [auth.SETCOGNITOINFO]({ commit }, cognitoInfo) {
-    commit(auth.SETCOGNITOINFO, cognitoInfo)
+  [auth.SETCOGNITOUSER]({ commit }, cognitoUser) {
+    commit(auth.SETCOGNITOUSER, cognitoUser)
   },
   async [auth.FORGOT_PASSWORD]({ commit }, email) {
     try {
       const response = await UserService.forgotPassword(email)
-      if (response !== null) {
+      if (response !== null && typeof response !== 'undefined') {
         commit(auth.RESET_PASSWORD_OK, true)
+        MessageService.dispatchInfo(
+          'CheckEmailCode',
+          'core/SHOW_TOASTER_MESSAGE',
+          'info.'
+        )
       }
     } catch (error) {
       console.log(error)
@@ -43,6 +53,11 @@ export default {
       )
       if (response === true) {
         commit(auth.RESET_PASSWORD_OK, false)
+        MessageService.dispatchSuccess(
+          'ResetPassword',
+          'core/SHOW_TOASTER_MESSAGE',
+          'success.'
+        )
         return true
       }
     } catch (error) {

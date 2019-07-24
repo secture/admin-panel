@@ -12,10 +12,10 @@ export default {
     state.password = ''
     state.loggedIn = false
     state.logout = true
-    state.cognitoInfo = null
+    state.cognitoUser = null
   },
-  [auth.SETCOGNITOINFO](state, cognitoInfo) {
-    state.cognitoInfo = cognitoInfo
+  [auth.SETCOGNITOUSER](state, cognitoUser) {
+    state.cognitoUser = cognitoUser
   },
   [auth.SETLOGGEDIN](state, loggedIn) {
     state.loggedIn = loggedIn

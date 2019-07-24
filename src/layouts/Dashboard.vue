@@ -6,7 +6,7 @@
       <slot></slot>
     </v-content>
     <LanguageButton></LanguageButton>
-    <SnackBar type="info" text="Texto de prueba"></SnackBar>
+    <SnackBar></SnackBar>
   </v-app>
 </template>
 

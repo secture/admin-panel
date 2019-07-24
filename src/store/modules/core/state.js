@@ -1,3 +1,8 @@
 export default {
-  showToaster: true,
+  showToaster: false,
+  message: {
+    code: '',
+    body: '',
+    type: '',
+  },
 }
