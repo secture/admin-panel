@@ -25,7 +25,6 @@ const UserService = {
   signOut: async function() {
     try {
       const response = await Auth.signOut()
-      console.log(response)
       return response
     } catch (error) {
       console.log(error)
@@ -34,7 +33,6 @@ const UserService = {
   forgotPassword: async function(userName) {
     try {
       const response = await Auth.forgotPassword(userName)
-      debugger
       return response
     } catch (error) {
       console.log(error)
