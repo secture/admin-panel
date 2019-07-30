@@ -25,9 +25,9 @@
           color="secondary_light"
           @click="changeLanguage(language.locale)"
           v-on="on"
-        >{{$t('flags.' + language.locale)}}</v-btn>
+        >{{ $t('flags.' + language.locale) }}</v-btn>
       </template>
-      <span>{{language.value}}</span>
+      <span>{{ language.value }}</span>
     </v-tooltip>
   </v-speed-dial>
 </template>
