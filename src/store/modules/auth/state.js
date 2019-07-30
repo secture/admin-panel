@@ -4,7 +4,7 @@ export default {
   login: false,
   logout: true,
 
-  cognitoInfo: null,
+  cognitoUser: null,
   resetPassword: false,
 
   loggedIn: false,

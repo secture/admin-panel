@@ -1,40 +1,50 @@
-import * as actions from '@/store/modules/auth/types'
+import * as auth from '@/store/modules/auth/types'
 import UserService from '@/api/cognito/userService'
+import MessageService from '@/services/messageServices'
 
 export default {
-  async [actions.LOGIN]({ commit }, user) {
-    try {
-      const response = await UserService.signIn(user)
-      commit(actions.LOGIN, user)
-      return response
-    } catch (error) {
-      console.log(error)
+  async [auth.LOGIN]({ commit }, user) {
+    const userCognito = await UserService.signIn(user)
+    if (userCognito !== null && typeof userCognito !== 'undefined') {
+      commit(auth.SETCOGNITOUSER, userCognito)
+      commit(auth.LOGIN, user)
+      MessageService.dispatchSuccess(
+        'UserLogin',
+        'core/SHOW_TOASTER_MESSAGE',
+        'success.'
+      )
     }
+    return userCognito
   },
-  async [actions.LOGOUT]({ commit }) {
+  async [auth.LOGOUT]({ commit }) {
     try {
       const response = await UserService.signOut()
       console.log(response)
-      commit(actions.LOGOUT)
+      commit(auth.LOGOUT)
     } catch (error) {
       console.log(error)
     }
   },
-  [actions.SETCOGNITOINFO]({ commit }, cognitoInfo) {
-    commit(actions.SETCOGNITOINFO, cognitoInfo)
+  [auth.SETCOGNITOUSER]({ commit }, cognitoUser) {
+    commit(auth.SETCOGNITOUSER, cognitoUser)
   },
-  async [actions.FORGOT_PASSWORD]({ commit }, email) {
+  async [auth.FORGOT_PASSWORD]({ commit }, email) {
     try {
       const response = await UserService.forgotPassword(email)
-      if (response !== null) {
-        commit(actions.RESET_PASSWORD_OK, true)
+      if (response !== null && typeof response !== 'undefined') {
+        commit(auth.RESET_PASSWORD_OK, true)
+        MessageService.dispatchInfo(
+          'CheckEmailCode',
+          'core/SHOW_TOASTER_MESSAGE',
+          'info.'
+        )
       }
     } catch (error) {
       console.log(error)
-      commit(actions.RESET_PASSWORD_OK, false)
+      commit(auth.RESET_PASSWORD_OK, false)
     }
   },
-  async [actions.RESET_PASSWORD]({ commit }, user) {
+  async [auth.RESET_PASSWORD]({ commit }, user) {
     try {
       const response = await UserService.resetPassword(
         user.email,
@@ -42,19 +52,24 @@ export default {
         user.newPassword
       )
       if (response === true) {
-        commit(actions.RESET_PASSWORD_OK, false)
+        commit(auth.RESET_PASSWORD_OK, false)
+        MessageService.dispatchSuccess(
+          'ResetPassword',
+          'core/SHOW_TOASTER_MESSAGE',
+          'success.'
+        )
         return true
       }
     } catch (error) {
       console.log(error)
-      commit(actions.RESET_PASSWORD_OK, false)
+      commit(auth.RESET_PASSWORD_OK, false)
       return false
     }
   },
-  [actions.SETLOGGEDIN]({ commit }, loggedIn) {
-    commit(actions.SETLOGGEDIN, loggedIn)
+  [auth.SETLOGGEDIN]({ commit }, loggedIn) {
+    commit(auth.SETLOGGEDIN, loggedIn)
   },
-  [actions.SETLOGGEDOUT]({ commit }, loggedOut) {
-    commit(actions.SETLOGGEDOUT, loggedOut)
+  [auth.SETLOGGEDOUT]({ commit }, loggedOut) {
+    commit(auth.SETLOGGEDOUT, loggedOut)
   },
 }

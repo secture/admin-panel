@@ -18,7 +18,7 @@ export default {
   computed: {
     ...mapGetters({
       email: authGet.GET_EMAIL,
-      cognitoUser: authGet.GET_COGNITO_INFO,
+      cognitoUser: authGet.GET_COGNITO_USER,
     }),
   },
 }
