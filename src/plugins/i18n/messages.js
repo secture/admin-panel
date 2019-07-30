@@ -11,6 +11,10 @@ export const messages = {
       refresh: 'Refresh form',
       reset: 'Reset password',
       code: 'Verification code',
+      rules: {
+        required: 'Required',
+        characters: 'Min 8 characters',
+      },
     },
     actions: {
       close: 'Close',
@@ -48,6 +52,10 @@ export const messages = {
       refresh: 'Limpiar formulario',
       reset: 'Cambiar contraseña',
       code: 'Código de verificación',
+      rules: {
+        required: 'Requerido',
+        characters: 'Mínimo 8 caracteres',
+      },
     },
     actions: {
       close: 'Cerrar',

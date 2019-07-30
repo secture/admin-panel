@@ -13,12 +13,11 @@
       </v-tooltip>
     </v-toolbar>
     <v-card-text>
-      <form>
+      <v-form ref="form" v-model="valid" :lazy-validation="lazy">
         <v-text-field
           class="pt-4"
           v-model="user.email"
-          v-validate="'required|email'"
-          :error-messages="errors.collect('email')"
+          :rules="emailRules"
           :label="$t('form.email')"
           data-vv-name="email"
           required
@@ -27,20 +26,20 @@
           class="pt-4"
           v-model="user.password"
           :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-          :rules="[rules.required, rules.min]"
+          :rules="passwordRules"
           :type="showPassword ? 'text' : 'password'"
           :label="$t('form.password')"
           hint="la contraseña cumple las restricciones"
           @click:append="showPassword = !showPassword"
         ></v-text-field>
-      </form>
+      </v-form>
       <div class="reset-password">
         <router-link to="/reset-password">{{$t('form.forgot_password')}}</router-link>
       </div>
     </v-card-text>
     <v-card-actions class="pa-3">
       <v-spacer></v-spacer>
-      <v-btn @click="submit" large color="secondary">{{$t('form.submit')}}</v-btn>
+      <v-btn :disabled="!valid" @click="submit" large color="secondary">{{$t('form.submit')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -51,14 +50,21 @@ import * as auth from '@/store/modules/auth/types'
 import router from '@/router'
 
 export default {
-  $_veeValidate: {
-    validator: 'new',
-  },
   data: () => ({
+    valid: true,
+    lazy: false,
     user: {
       email: '',
       password: '',
     },
+    emailRules: [
+      value => !!value || 'El email es requerido',
+      value => /.+@.+\..+/.test(value) || 'El email debe ser válido',
+    ],
+    passwordRules: [
+      value => !!value || 'Requerido',
+      value => (value && value.length >= 8) || 'Mínimo 8 caracteres',
+    ],
     dictionary: {
       attributes: {
         email: 'E-mail Address',
@@ -66,10 +72,6 @@ export default {
       },
     },
     showPassword: false,
-    rules: {
-      required: value => !!value || 'Required.',
-      min: v => v.length >= 8 || 'Min 8 characters',
-    },
   }),
   methods: {
     ...mapActionsAuth({
@@ -77,7 +79,7 @@ export default {
       cognitoUser: auth.SETCOGNITOUSER,
     }),
     submit() {
-      if (this.$validator.validateAll()) {
+      if (this.$refs.form.validate()) {
         this.loginUser(this.user).then(cognitoUser => {
           if (cognitoUser !== null) {
             router.push({ path: '/' })
@@ -86,9 +88,7 @@ export default {
       }
     },
     clear() {
-      this.user.password = ''
-      this.user.email = ''
-      this.$validator.reset()
+      this.$refs.form.reset()
     },
   },
 }

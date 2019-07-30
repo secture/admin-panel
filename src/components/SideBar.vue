@@ -9,7 +9,7 @@
           <v-list-tile-title>Admin Fantasy LaLiga</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <hr class="v-divider theme--dark">
+      <hr class="v-divider theme--dark" />
       <v-list-tile v-for="item in items" :key="item.title">
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
