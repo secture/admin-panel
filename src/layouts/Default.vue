@@ -11,6 +11,7 @@ import Vue from 'vue'
 import VeeValidate from 'vee-validate'
 import LanguageButton from '@/components/LanguageButton'
 import SnackBar from '@/components/SnackBar'
+import store from '@/store'
 
 Vue.use(VeeValidate)
 
@@ -20,6 +21,7 @@ export default {
     SnackBar,
   },
   mounted() {
+    console.log(store)
     this.$validator.localize('en', this.dictionary)
   },
 }
