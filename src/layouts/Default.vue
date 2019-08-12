@@ -21,7 +21,6 @@ export default {
     SnackBar,
   },
   mounted() {
-    console.log(store)
     this.$validator.localize('en', this.dictionary)
   },
 }

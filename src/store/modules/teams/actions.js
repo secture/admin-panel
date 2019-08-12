@@ -2,15 +2,12 @@ import * as teams from '@/store/modules/teams/types'
 import TeamsService from '@/api/admin/teamsService'
 
 export default {
-  [teams.GET_TEAMS]({ commit }) {
-    const teams = TeamsService.getTeams()
-    if (teams !== null && typeof teams !== 'undefined') {
-      commit(teams.SET_TEAMS, teams)
+  async [teams.GET_TEAMS]({ commit }) {
+    const data = await TeamsService.getTeams()
+    if (data !== null && typeof data !== 'undefined') {
+      commit(teams.SET_TEAMS, data)
     }
-    return teams
-  },
-  [teams.SET_TEAMS]({ commit }, teams) {
-    commit(teams.SET_TEAMS, teams)
+    return data
   },
   [teams.SET_CURRENT_TEAM]({ commit }, team) {
     if (team !== null || typeof team !== 'undefined') {
