@@ -9,7 +9,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    console.log('entro en players')
+  },
+}
 </script>
 
 <style>
