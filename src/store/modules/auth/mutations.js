@@ -17,6 +17,9 @@ export default {
   [auth.SETCOGNITOUSER](state, cognitoUser) {
     state.cognitoUser = cognitoUser
   },
+  [auth.SETCOGNITOTOKEN](state, cognitoToken) {
+    state.cognitoToken = cognitoToken
+  },
   [auth.SETLOGGEDIN](state, loggedIn) {
     state.loggedIn = loggedIn
   },

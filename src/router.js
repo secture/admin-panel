@@ -39,6 +39,16 @@ const router = new Router({
       meta: { layout: 'default-layout' },
       component: require('@/views/ResetPassword.vue').default,
     },
+    {
+      path: '/teams',
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/teams/Teams.vue').default,
+    },
+    {
+      path: '/players',
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/players/Players.vue').default,
+    },
     // {
     //   path: '/auth',
     //   beforeEnter() {

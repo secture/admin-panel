@@ -76,7 +76,6 @@ export default {
   methods: {
     ...mapActionsAuth({
       loginUser: auth.LOGIN,
-      cognitoUser: auth.SETCOGNITOUSER,
     }),
     submit() {
       if (this.$refs.form.validate()) {

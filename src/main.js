@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 import './registerServiceWorker'
 import { i18n } from '@/plugins/i18n/main'
 
@@ -23,6 +24,7 @@ Vue.component('default-layout', Default)
 new Vue({
   router,
   store,
+  axios,
   i18n,
   render: h => h(App),
 }).$mount('#app')

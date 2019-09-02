@@ -5,6 +5,7 @@ export default {
   logout: true,
 
   cognitoUser: null,
+  cognitoToken: null,
   resetPassword: false,
 
   loggedIn: false,

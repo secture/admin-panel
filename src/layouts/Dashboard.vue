@@ -36,7 +36,7 @@
           </v-list-tile-content>
         </v-list-tile>
         <hr class="v-divider theme--dark" />
-        <v-list-tile v-for="item in items" :key="item.title">
+        <v-list-tile v-for="item in items" :key="item.title" v-ripple @click="navigateTo(item.url)">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -47,7 +47,9 @@
       </v-list>
     </v-navigation-drawer>
     <v-content :class="($vuetify.breakpoint.mdAndDown) ? 'ml-0' : 'ml-300'">
-      <slot></slot>
+      <transition name="fade" mode="out-in">
+        <slot></slot>
+      </transition>
     </v-content>
     <LanguageButton></LanguageButton>
     <SnackBar></SnackBar>
@@ -72,9 +74,9 @@ export default {
     return {
       drawer: null,
       items: [
-        { title: 'Inicio', icon: 'dashboard' },
-        { title: 'Equipos', icon: 'videogame_asset' },
-        { title: 'Jugadores', icon: 'people' },
+        { title: 'Inicio', icon: 'dashboard', url: '/' },
+        { title: 'Equipos', icon: 'videogame_asset', url: '/teams' },
+        { title: 'Jugadores', icon: 'people', url: '/players' },
       ],
     }
   },
@@ -88,6 +90,9 @@ export default {
     ...mapActions({
       signOutUser: actions.LOGOUT,
     }),
+    navigateTo(url) {
+      router.push({ path: url })
+    },
     signOut() {
       this.signOutUser()
       router.push({ path: '/login' })

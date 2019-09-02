@@ -30,6 +30,7 @@ export const messages = {
       CodeMissmatchException: 'User code verification is not correct',
       InvalidPasswordException:
         'Password does not conform to policy: Password must have symbol characters',
+      GetTeamsMaster: 'An error has occurred when retrieve teams',
     },
     success: {
       UserLogin: 'Success user logged',
@@ -71,6 +72,7 @@ export const messages = {
       CodeMissmatchException: 'El codigo de verificación no es correcto',
       InvalidPasswordException:
         'La password no es correcta: Debe contener al menos un caracter',
+      GetTeamsMaster: 'Ha ocurrido un error al obtener los equipos',
     },
     success: {
       UserLogin: 'Usuario logeado con éxito',

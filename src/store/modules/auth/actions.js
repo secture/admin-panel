@@ -7,6 +7,10 @@ export default {
     const userCognito = await UserService.signIn(user)
     if (userCognito !== null && typeof userCognito !== 'undefined') {
       commit(auth.SETCOGNITOUSER, userCognito)
+      commit(
+        auth.SETCOGNITOTOKEN,
+        userCognito.signInUserSession.accessToken.jwtToken
+      )
       commit(auth.LOGIN, user)
       MessageService.dispatchSuccess(
         'UserLogin',

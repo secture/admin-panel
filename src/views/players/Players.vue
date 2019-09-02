@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout align-center justify-center>
       <v-flex xs12>
-        <h1>Home Content</h1>
+        <h1>Players content</h1>
       </v-flex>
     </v-layout>
   </v-container>
@@ -10,7 +10,11 @@
 
 <script>
 export default {
-  name: 'Home',
+  mounted() {
+    console.log('entro en players')
+  },
 }
 </script>
-<style></style>
+
+<style>
+</style>
