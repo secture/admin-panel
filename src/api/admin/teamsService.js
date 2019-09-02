@@ -17,10 +17,7 @@ const TeamsService = {
     return teams.data
   },
   addTeam: function() {},
-  updateTeam: function(dspId, store) {
-    //llamada al endpoint /api/v1/teams/admin/team-master pasando id y el team actualizado
-    //una vez obtenidos los teams llamar a la action SET_TEAM para guardar el current team
-  },
+  updateTeam: function(dspId, store) {},
   deleteTeam: function() {},
 }
 
