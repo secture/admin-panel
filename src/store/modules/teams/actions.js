@@ -5,7 +5,7 @@ export default {
   async [teams.GET_TEAMS]({ commit }) {
     const data = await TeamsService.getTeams()
     if (data !== null && typeof data !== 'undefined') {
-      commit(teams.SET_TEAMS, data)
+      commit(teams.SET_DATA, data)
     }
     return data
   },

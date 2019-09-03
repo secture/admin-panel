@@ -7,7 +7,6 @@ const TeamsService = {
     try {
       teams = await httpClient.get('api/v1/teams/admin/team-master')
     } catch (error) {
-      console.log(error)
       MessageService.dispatchError(
         'GetTeamsMaster',
         'core/SHOW_TOASTER_MESSAGE',
@@ -17,7 +16,7 @@ const TeamsService = {
     return teams.data
   },
   addTeam: function() {},
-  updateTeam: function(dspId, store) {},
+  updateTeam: function() {},
   deleteTeam: function() {},
 }
 

@@ -6,12 +6,16 @@ export default {
   async [auth.LOGIN]({ commit }, user) {
     const userCognito = await UserService.signIn(user)
     if (userCognito !== null && typeof userCognito !== 'undefined') {
-      commit(auth.SETCOGNITOUSER, userCognito)
+      commit(auth.LOGIN, userCognito)
       commit(
         auth.SETCOGNITOTOKEN,
         userCognito.signInUserSession.accessToken.jwtToken
       )
-      commit(auth.LOGIN, user)
+      commit(auth.SETUSERLOGGED, true)
+      localStorage.setItem(
+        'user-token',
+        userCognito.signInUserSession.accessToken.jwtToken
+      )
       MessageService.dispatchSuccess(
         'UserLogin',
         'core/SHOW_TOASTER_MESSAGE',
@@ -21,16 +25,24 @@ export default {
     return userCognito
   },
   async [auth.LOGOUT]({ commit }) {
-    try {
-      const response = await UserService.signOut()
-      console.log(response)
-      commit(auth.LOGOUT)
-    } catch (error) {
-      console.log(error)
-    }
+    const response = await UserService.signOut()
+    commit(auth.SETUSERLOGGED, false)
+    localStorage.removeItem('user-token')
+    return response
   },
-  [auth.SETCOGNITOUSER]({ commit }, cognitoUser) {
-    commit(auth.SETCOGNITOUSER, cognitoUser)
+  async [auth.GETAUTHENTICATEDUSER]({ commit }) {
+    const userAuthenticated = await UserService.getCurrentAuthenticatedUser()
+    commit(auth.LOGIN, userAuthenticated)
+    commit(
+      auth.SETCOGNITOTOKEN,
+      userAuthenticated.signInUserSession.accessToken.jwtToken
+    )
+    commit(auth.SETUSERLOGGED, true)
+    localStorage.setItem(
+      'user-token',
+      userAuthenticated.signInUserSession.accessToken.jwtToken
+    )
+    return userAuthenticated
   },
   async [auth.FORGOT_PASSWORD]({ commit }, email) {
     try {
@@ -69,11 +81,5 @@ export default {
       commit(auth.RESET_PASSWORD_OK, false)
       return false
     }
-  },
-  [auth.SETLOGGEDIN]({ commit }, loggedIn) {
-    commit(auth.SETLOGGEDIN, loggedIn)
-  },
-  [auth.SETLOGGEDOUT]({ commit }, loggedOut) {
-    commit(auth.SETLOGGEDOUT, loggedOut)
   },
 }
