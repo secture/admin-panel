@@ -76,7 +76,7 @@ export default {
       user: null,
       items: [
         { title: 'Inicio', icon: 'dashboard', url: '/' },
-        { title: 'Equipos', icon: 'videogame_asset', url: '/teams' },
+        { title: 'Equipos', icon: 'shield', url: '/teams' },
         { title: 'Jugadores', icon: 'people', url: '/players' },
       ],
     }
