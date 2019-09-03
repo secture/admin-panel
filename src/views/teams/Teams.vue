@@ -10,6 +10,9 @@
           class="elevation-1"
         >
           <template v-slot:items="props">
+            <td class="text-start">
+              <img :src="props.item.badgeColor" alt />
+            </td>
             <td class="text-start">{{ props.item.dspId }}</td>
             <td class="text-start">{{ props.item.id }}</td>
             <td class="text-start">{{ props.item.name }}</td>
@@ -38,6 +41,7 @@ export default {
     return {
       title: 'Lista de jugadores',
       headers: [
+        { text: 'Shield', align: 'left', value: 'badgeColor' },
         { text: 'dsp id', align: 'left', value: 'dspId' },
         { text: 'id', align: 'left', value: 'id' },
         { text: 'Name', align: 'left', value: 'name' },
@@ -59,7 +63,7 @@ export default {
   },
   computed: {
     ...mapGettersTeams({
-      teamsStored: teamsGetters.GET_TEAMS,
+      teamsStored: teamsGetters.GET_DATA,
     }),
   },
   methods: {
@@ -69,15 +73,33 @@ export default {
     }),
   },
   mounted() {
-    if (this.teamsStored === null) {
+    if (this.teamsStored.results === null) {
       this.getTeams().then(teamsMaster => {
         if (teamsMaster !== null) {
           this.teams = teamsMaster
         }
       })
+    } else {
+      this.teams = this.teamsStored
     }
   },
 }
 </script>
-<style>
+<style lang="scss">
+table {
+  tbody {
+    tr {
+      td:first-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+td {
+  img {
+    width: 25px;
+  }
+}
 </style>

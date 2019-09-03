@@ -9,7 +9,6 @@ async function requireAuth(to, from, next) {
     //store.dispatch(authTypes.SETLOGGEDIN, false)
     next({
       path: '/login',
-      query: { redirect: to.fullPath },
     })
   } else {
     next()
@@ -49,14 +48,6 @@ const router = new Router({
       meta: { layout: 'dashboard-layout' },
       component: require('@/views/players/Players.vue').default,
     },
-    // {
-    //   path: '/auth',
-    //   beforeEnter() {
-    //     var currUrl = window.location.href
-    //     console.log(currUrl)
-    //     cognito.auth.parseCognitoWebResponse(currUrl)
-    //   },
-    // },
     {
       path: '/logout',
       meta: { layout: 'dashboard-layout' },
@@ -68,12 +59,5 @@ const router = new Router({
     },*/
   ],
 })
-
-/*outer.beforeEach((to, from, next) => {
-  if (to.fullPath === '/' && store.getters['auth/GET_LOGIN'] === false) {
-    next('/login')
-  }
-  next()
-})*/
 
 export default router

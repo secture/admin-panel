@@ -9,7 +9,7 @@
           <v-flex>
             <v-avatar size="32px" class="ma-1">
               <img
-                v-if="userLoged"
+                v-if="userLogged"
                 src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
                 alt="Avatar"
               />
@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       drawer: null,
+      user: null,
       items: [
         { title: 'Inicio', icon: 'dashboard', url: '/' },
         { title: 'Equipos', icon: 'videogame_asset', url: '/teams' },
@@ -83,20 +84,32 @@ export default {
   computed: {
     ...mapGetters({
       email: authGet.GET_EMAIL,
-      userLoged: authGet.GET_LOGIN,
+      userLogged: authGet.GET_USER_LOGGED,
+      cognitoUser: authGet.GET_COGNITO_USER,
     }),
   },
   methods: {
     ...mapActions({
       signOutUser: actions.LOGOUT,
+      authenticatedUser: actions.GETAUTHENTICATEDUSER,
     }),
     navigateTo(url) {
       router.push({ path: url })
     },
     signOut() {
-      this.signOutUser()
-      router.push({ path: '/login' })
+      this.signOutUser().then(() => {
+        router.push({ path: '/login' })
+      })
     },
+  },
+  mounted() {
+    if (this.cognitoUser !== null) {
+      this.user = this.cognitoUser
+    } else {
+      this.authenticatedUser().then(authenticatedUser => {
+        this.user = authenticatedUser
+      })
+    }
   },
 }
 </script>

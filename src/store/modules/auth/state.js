@@ -1,14 +1,9 @@
 export default {
   email: '',
-  password: '',
-  login: false,
-  logout: true,
+  logged: false,
 
   cognitoUser: null,
-  cognitoToken: null,
-  resetPassword: false,
+  cognitoToken: localStorage.getItem('user-token') || null,
 
-  loggedIn: false,
-  loadingState: true,
-  errorLoadingState: false,
+  resetPassword: false,
 }

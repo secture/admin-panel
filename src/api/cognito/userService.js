@@ -57,11 +57,14 @@ const UserService = {
   },
   getCurrentAuthenticatedUser: async function() {
     try {
-      const user = await Auth.currentAuthenticatedUser()
-      return user
+      const userAuthenticated = await Auth.currentAuthenticatedUser()
+      return userAuthenticated
     } catch (error) {
-      console.log(error)
-      return null
+      MessageService.dispatchError(
+        error,
+        'core/SHOW_TOASTER_MESSAGE',
+        'errors.'
+      )
     }
   },
 }
