@@ -48,6 +48,8 @@
               :headers="headers"
               :items="teams.results"
               :search="search"
+              :loading="teams.results.length === 0"
+              loading-text="Cargando equipos"
               class="elevation-1"
             >
               <template v-slot:items="props">
