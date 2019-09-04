@@ -89,7 +89,7 @@ import {
   mapGetters as mapGettersTeams,
 } from '@/store/modules/teams'
 import * as teamsGetters from '@/store/modules/teams/getters'
-import * as actionsTeams from '@/store/modules/teams/types'
+import * as teamsActions from '@/store/modules/teams/types'
 
 export default {
   data() {
@@ -130,8 +130,8 @@ export default {
   },
   methods: {
     ...mapActionsTeams({
-      getTeams: actionsTeams.GET_TEAMS,
-      updatedTeam: actionsTeams.UPDATE_TEAM,
+      getTeams: teamsActions.GET_TEAMS,
+      updatedTeam: teamsActions.UPDATE_TEAM,
     }),
     confirmEditTeam() {
       this.updatedTeam(this.editedTeam).then(response => {

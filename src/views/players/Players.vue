@@ -9,9 +9,39 @@
 </template>
 
 <script>
+import {
+  mapActions as mapActionsPlayers,
+  mapGetters as mapGettersPlayers,
+} from '@/store/modules/players'
+import * as playersGetters from '@/store/modules/players/getters'
+import * as playersActions from '@/store/modules/players/types'
+
 export default {
+  data() {
+    return {
+      players: null,
+    }
+  },
   mounted() {
-    console.log('entro en players')
+    if (this.playersStored.results === null) {
+      this.getPlayers().then(playerMaster => {
+        if (playerMaster !== null) {
+          this.players = playerMaster
+        }
+      })
+    } else {
+      this.players = this.playersStored
+    }
+  },
+  computed: {
+    ...mapGettersPlayers({
+      playersStored: playersGetters.GET_PLAYERS,
+    }),
+  },
+  methods: {
+    ...mapActionsPlayers({
+      getPlayers: playersActions.GET_PLAYERS,
+    }),
   },
 }
 </script>
