@@ -31,6 +31,7 @@ export const messages = {
       InvalidPasswordException:
         'Password does not conform to policy: Password must have symbol characters',
       GetTeamsMaster: 'An error has occurred when retrieve teams',
+      UpdateTeamMaster: 'n error has occurred when updated the team',
     },
     success: {
       UserLogin: 'Success user logged',
@@ -39,6 +40,9 @@ export const messages = {
     info: {
       CheckEmailCode:
         'You have been sent a code via email to reset your password',
+    },
+    teams: {
+      teamUpdated: 'Team updated',
     },
   },
   es: {
@@ -73,6 +77,7 @@ export const messages = {
       InvalidPasswordException:
         'La password no es correcta: Debe contener al menos un caracter',
       GetTeamsMaster: 'Ha ocurrido un error al obtener los equipos',
+      UpdateTeamMaster: 'Ha ocurrido un error al actualizar el equipo',
     },
     success: {
       UserLogin: 'Usuario logeado con éxito',
@@ -81,6 +86,9 @@ export const messages = {
     info: {
       CheckEmailCode:
         'Se le ha enviado un código vía email para reestablecer su contraseña',
+    },
+    teams: {
+      teamUpdated: 'Equipo editado',
     },
   },
 }

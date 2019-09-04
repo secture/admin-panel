@@ -26,7 +26,6 @@ const okInterceptor = response => {
 }
 
 const errorInterceptor = error => {
-  debugger
   if (error.request.status == 401) {
     const refreshToken =
       store.getters['auth/GET_COGNITO_USER'].signInUserSession.refreshToken
