@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar flat>
+    <v-toolbar flat dark class="primary base">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>title prueba</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -25,7 +25,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-navigation-drawer v-model="drawer" absolute>
+    <v-navigation-drawer dark class="primary darken-1" v-model="drawer" absolute>
       <v-list class="pt-0 pb-0">
         <v-list-tile class="banner pt-2 pb-2">
           <v-avatar class="ma-2">
@@ -46,7 +46,10 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-content :class="($vuetify.breakpoint.mdAndDown) ? 'ml-0' : 'ml-300'">
+    <v-content
+      class="primary lighten-1"
+      :class="($vuetify.breakpoint.mdAndDown) ? 'ml-0' : 'ml-300'"
+    >
       <transition name="fade" mode="out-in">
         <slot></slot>
       </transition>

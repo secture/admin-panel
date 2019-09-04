@@ -1,6 +1,6 @@
 <template>
-  <v-card class="elevation-12">
-    <v-toolbar>
+  <v-card dark class="elevation-12">
+    <v-toolbar class="primary darken-1">
       <v-toolbar-title>{{$t('form.titleLogin')}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
@@ -12,7 +12,7 @@
         <span>{{$t('form.refresh')}}</span>
       </v-tooltip>
     </v-toolbar>
-    <v-card-text>
+    <v-card-text class="primary base">
       <v-form ref="form" v-model="valid" :lazy-validation="lazy">
         <v-text-field
           class="pt-4"
@@ -37,9 +37,9 @@
         <router-link to="/reset-password">{{$t('form.forgot_password')}}</router-link>
       </div>
     </v-card-text>
-    <v-card-actions class="pa-3">
+    <v-card-actions class="primary base pa-3">
       <v-spacer></v-spacer>
-      <v-btn :disabled="!valid" @click="submit" large>{{$t('form.submit')}}</v-btn>
+      <v-btn :disabled="!valid" class="secondary" @click="submit" large>{{$t('form.submit')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

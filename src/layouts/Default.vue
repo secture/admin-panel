@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="primary lighten-1">
     <slot></slot>
     <LanguageButton></LanguageButton>
     <SnackBar></SnackBar>
