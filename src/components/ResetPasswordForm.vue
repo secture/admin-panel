@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar dark color="primary">
+    <v-toolbar>
       <v-toolbar-title>{{$t('form.titleResetPassword')}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
@@ -26,18 +26,8 @@
     <v-card-actions class="pa-3">
       <v-btn @click="backTo()" flat large>{{$t('form.back')}}</v-btn>
       <v-spacer></v-spacer>
-      <v-btn
-        v-if="reset === false"
-        @click="forgotPassword()"
-        large
-        color="secondary"
-      >{{$t('form.submit')}}</v-btn>
-      <v-btn
-        v-if="reset === true"
-        @click="resetPassword()"
-        large
-        color="secondary"
-      >{{$t('form.reset')}}</v-btn>
+      <v-btn v-if="reset === false" @click="forgotPassword()" large>{{$t('form.submit')}}</v-btn>
+      <v-btn v-if="reset === true" @click="resetPassword()" large>{{$t('form.reset')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

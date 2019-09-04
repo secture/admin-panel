@@ -7,7 +7,7 @@
     :vertical="mode === 'vertical'"
   >
     {{$t(message.code)}}
-    <v-btn dark flat @click="snackBar = false">{{$t('actions.close')}}</v-btn>
+    <v-btn flat @click="snackBar = false">{{$t('actions.close')}}</v-btn>
   </v-snackbar>
 </template>
 <script>

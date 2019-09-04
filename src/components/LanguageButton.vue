@@ -10,19 +10,17 @@
     :transition="transition"
   >
     <template v-slot:activator>
-      <v-btn v-model="fab" color="primary" dark fab>
+      <v-btn v-model="fab" fab>
         <v-icon>flag</v-icon>
         <v-icon>close</v-icon>
       </v-btn>
     </template>
-    <v-tooltip left color="primary" v-for="(language, i) in languages" :key="i">
+    <v-tooltip left v-for="(language, i) in languages" :key="i">
       <template v-slot:activator="{ on }">
         <v-btn
           class="flag"
           fab
-          dark
           small
-          color="secondary_light"
           @click="changeLanguage(language.locale)"
           v-on="on"
         >{{ $t('flags.' + language.locale) }}</v-btn>

@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar dark color="primary">
+    <v-toolbar>
       <v-toolbar-title>{{$t('form.titleLogin')}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
@@ -39,7 +39,7 @@
     </v-card-text>
     <v-card-actions class="pa-3">
       <v-spacer></v-spacer>
-      <v-btn :disabled="!valid" @click="submit" large color="secondary">{{$t('form.submit')}}</v-btn>
+      <v-btn :disabled="!valid" @click="submit" large>{{$t('form.submit')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

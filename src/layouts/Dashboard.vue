@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar flat dark class="primary_dark">
+    <v-toolbar flat>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>title prueba</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -25,17 +25,17 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-navigation-drawer v-model="drawer" absolute dark class="primary_dark">
+    <v-navigation-drawer v-model="drawer" absolute>
       <v-list class="pt-0 pb-0">
         <v-list-tile class="banner pt-2 pb-2">
-          <v-avatar class="secondary ma-2">
+          <v-avatar class="ma-2">
             <span class="white--text headline">F</span>
           </v-avatar>
           <v-list-tile-content class="banner-title">
             <v-list-tile-title>Admin Fantasy LaLiga</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <hr class="v-divider theme--dark" />
+        <hr class="v-divider" />
         <v-list-tile v-for="item in items" :key="item.title" v-ripple @click="navigateTo(item.url)">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -103,6 +103,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$vuetify.theme.themes)
     if (this.cognitoUser !== null) {
       this.user = this.cognitoUser
     } else {
