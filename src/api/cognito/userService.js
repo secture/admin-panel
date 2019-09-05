@@ -57,7 +57,7 @@ const UserService = {
   },
   getCurrentAuthenticatedUser: async function() {
     try {
-      const userAuthenticated = await Auth.currentAuthenticatedUser()
+      const userAuthenticated = await Auth.currentUserInfo()
       return userAuthenticated
     } catch (error) {
       MessageService.dispatchError(

@@ -20,7 +20,7 @@
             <strong v-html="email"></strong>
           </v-flex>
         </v-btn>
-        <v-btn flat @click="signOut()">
+        <v-btn @click="signOut()" flat>
           <span>Cerrar sesión</span>
         </v-btn>
       </v-toolbar-items>
