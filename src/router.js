@@ -5,8 +5,7 @@ import UserService from '@/api/cognito/userService'
 
 async function requireAuth(to, from, next) {
   const userAuth = await UserService.getCurrentAuthenticatedUser()
-  if (userAuth === null) {
-    //store.dispatch(authTypes.SETLOGGEDIN, false)
+  if (typeof userAuth === 'undefined' || userAuth === null) {
     next({
       path: '/login',
     })
@@ -42,11 +41,13 @@ const router = new Router({
       path: '/teams',
       meta: { layout: 'dashboard-layout' },
       component: require('@/views/teams/Teams.vue').default,
+      beforeEnter: requireAuth,
     },
     {
       path: '/players',
       meta: { layout: 'dashboard-layout' },
       component: require('@/views/players/Players.vue').default,
+      beforeEnter: requireAuth,
     },
     {
       path: '/logout',
