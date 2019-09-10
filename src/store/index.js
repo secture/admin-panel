@@ -10,6 +10,7 @@ import state from './state'
 import authModule from './modules/auth'
 import coreModule from './modules/core'
 import teamsModule from './modules/teams'
+import playersModule from './modules/players'
 
 Vue.use(Vuex)
 
@@ -22,5 +23,6 @@ export default new Vuex.Store({
     auth: authModule,
     core: coreModule,
     teams: teamsModule,
+    players: playersModule,
   },
 })

@@ -1,4 +1,9 @@
 export default {
-  players: null,
-  currentPlayer: null,
+  data: {
+    page: 0,
+    pageSize: 0,
+    results: null,
+    totalResults: 0,
+    currentPlayer: null,
+  },
 }
