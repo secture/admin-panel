@@ -1,8 +1,10 @@
 module.exports = {
   root: true,
+
   env: {
     node: true,
   },
+
   extends: [
     'plugin:vue/essential',
     'eslint:recommended',
@@ -10,13 +12,26 @@ module.exports = {
     'prettier',
     'prettier/vue',
   ],
+
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
+
   parser: 'vue-eslint-parser',
+
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
   },
+
   plugins: ['vue'],
+
+  'extends': [
+    'plugin:vue/essential',
+    'eslint:recommended',
+    'plugin:vue/recommended',
+    'prettier',
+    'prettier/vue',
+    '@vue/typescript'
+  ]
 }

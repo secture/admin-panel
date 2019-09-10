@@ -1,7 +1,7 @@
 import store from '@/store'
 
 const MessageService = {
-  dispatchError: function(error, action, prefix) {
+  dispatchError: function(error: any, action: any, prefix: any) {
     store.dispatch(action, {
       showToaster: true,
       message: {
@@ -11,7 +11,7 @@ const MessageService = {
       },
     })
   },
-  dispatchWarning: function(code, action, prefix) {
+  dispatchWarning: function(code: any, action: any, prefix: any) {
     store.dispatch(action, {
       showToaster: true,
       message: {
@@ -21,7 +21,7 @@ const MessageService = {
       },
     })
   },
-  dispatchSuccess: function(code, action, prefix) {
+  dispatchSuccess: function(code: any, action: any, prefix: any) {
     store.dispatch(action, {
       showToaster: true,
       message: {
@@ -31,7 +31,7 @@ const MessageService = {
       },
     })
   },
-  dispatchInfo: function(code, action, prefix) {
+  dispatchInfo: function(code: any, action: any, prefix: any) {
     store.dispatch(action, {
       showToaster: true,
       message: {

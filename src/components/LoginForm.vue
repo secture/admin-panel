@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn @click="clear" icon large v-on="on">
+          <v-btn v-on="on" @click="clear" icon large>
             <v-icon large>refresh</v-icon>
           </v-btn>
         </template>
@@ -15,22 +15,22 @@
     <v-card-text>
       <v-form ref="form" v-model="valid" :lazy-validation="lazy">
         <v-text-field
-          class="pt-4"
           v-model="user.email"
           :rules="emailRules"
           :label="$t('form.email')"
+          class="pt-4"
           data-vv-name="email"
           required
         ></v-text-field>
         <v-text-field
-          class="pt-4"
           v-model="user.password"
           :append-icon="showPassword ? 'visibility' : 'visibility_off'"
           :rules="passwordRules"
           :type="showPassword ? 'text' : 'password'"
           :label="$t('form.password')"
-          hint="la contraseña cumple las restricciones"
           @click:append="showPassword = !showPassword"
+          class="pt-4"
+          hint="la contraseña cumple las restricciones"
         ></v-text-field>
       </v-form>
       <div class="reset-password">
@@ -44,26 +44,30 @@
   </v-card>
 </template>
 
-<script>
-import { mapActions as mapActionsAuth } from '@/store/modules/auth'
+<script lang="ts">
+import Vue from 'vue'
+import { mapActions } from '@/store/modules/auth'
 import * as auth from '@/store/modules/auth/types'
 import router from '@/router'
+export type VForm = Vue & { validate: () => boolean }
 
-export default {
+import { User } from '@/types'
+
+export default Vue.extend({
   data: () => ({
     valid: true,
     lazy: false,
     user: {
       email: '',
       password: '',
-    },
+    } as User,
     emailRules: [
-      value => !!value || 'El email es requerido',
-      value => /.+@.+\..+/.test(value) || 'El email debe ser válido',
+      (value: any) => !!value || 'El email es requerido',
+      (value: any) => /.+@.+\..+/.test(value) || 'El email debe ser válido',
     ],
     passwordRules: [
-      value => !!value || 'Requerido',
-      value => (value && value.length >= 8) || 'Mínimo 8 caracteres',
+      (value: any) => !!value || 'Requerido',
+      (value: any) => (value && value.length >= 8) || 'Mínimo 8 caracteres',
     ],
     dictionary: {
       attributes: {
@@ -73,13 +77,18 @@ export default {
     },
     showPassword: false,
   }),
+  computed: {
+    form(): HTMLFormElement {
+      return this.$refs.form as HTMLFormElement
+    },
+  },
   methods: {
-    ...mapActionsAuth({
+    ...mapActions({
       loginUser: auth.LOGIN,
     }),
     submit() {
-      if (this.$refs.form.validate()) {
-        this.loginUser(this.user).then(cognitoUser => {
+      if (this.form.validate()) {
+        this['loginUser'](this.user).then((cognitoUser: any) => {
           if (cognitoUser !== null) {
             router.push({ path: '/' })
           }
@@ -87,10 +96,10 @@ export default {
       }
     },
     clear() {
-      this.$refs.form.reset()
+      this.form.reset()
     },
   },
-}
+})
 </script>
 
 <style lang="scss">

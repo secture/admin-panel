@@ -26,8 +26,8 @@
             </v-card-text>
             <v-card-actions class="justify-self-end pa-4">
               <v-spacer></v-spacer>
-              <v-btn flat color="pink" text @click="close">Cancel</v-btn>
-              <v-btn dark color="teal" text @click="confirmEditTeam()">Save</v-btn>
+              <v-btn @click="close" flat color="pink" text>Cancel</v-btn>
+              <v-btn @click="confirmEditTeam()" dark color="teal" text>Save</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -67,10 +67,10 @@
                 <td class="text-start pa-2">{{ props.item.badgeWhite }}</td>
                 <td class="text-start pa-2 layout">
                   {{ props.item.action }}
-                  <v-btn icon class="mx-0" @click="editTeam(props.item)">
+                  <v-btn @click="editTeam(props.item)" icon class="mx-0">
                     <v-icon color="teal">edit</v-icon>
                   </v-btn>
-                  <v-btn icon class="mx-0" @click="deleteTeam(props.item)">
+                  <v-btn @click="deleteTeam(props.item)" icon class="mx-0">
                     <v-icon color="pink">delete</v-icon>
                   </v-btn>
                 </td>
@@ -83,7 +83,8 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import {
   mapActions as mapActionsTeams,
   mapGetters as mapGettersTeams,
@@ -91,7 +92,7 @@ import {
 import * as teamsGetters from '@/store/modules/teams/getters'
 import * as actionsTeams from '@/store/modules/teams/types'
 
-export default {
+export default Vue.extend({
   data() {
     return {
       title: 'Listado de equipos',
@@ -128,15 +129,31 @@ export default {
       teamsStored: teamsGetters.GET_DATA,
     }),
   },
+  watch: {
+    dialog(val) {
+      val || this.close()
+    },
+  },
+  mounted() {
+    if (this.teamsStored.results === null) {
+      this.getTeams().then((teamsMaster: any) => {
+        if (teamsMaster !== null) {
+          this.teams = teamsMaster
+        }
+      })
+    } else {
+      this.teams = this.teamsStored
+    }
+  },
   methods: {
     ...mapActionsTeams({
       getTeams: actionsTeams.GET_TEAMS,
       updatedTeam: actionsTeams.UPDATE_TEAM,
     }),
     confirmEditTeam() {
-      this.updatedTeam(this.editedTeam).then(response => {
+      this.updatedTeam(this.editedTeam).then((response: any) => {
         if (response !== null) {
-          this.getTeams().then(teamsMaster => {
+          this.getTeams().then((teamsMaster: any) => {
             if (teamsMaster !== null) {
               this.teams = teamsMaster
             }
@@ -146,36 +163,20 @@ export default {
       this.close()
     },
 
-    editTeam(team) {
+    editTeam(team: any) {
       this.editedTeam = Object.assign({}, team)
       this.dialog = true
     },
 
-    deleteTeam(team) {
+    deleteTeam(team: any) {
       console.log(team)
     },
 
     close() {
       this.dialog = false
     },
-  },
-  mounted() {
-    if (this.teamsStored.results === null) {
-      this.getTeams().then(teamsMaster => {
-        if (teamsMaster !== null) {
-          this.teams = teamsMaster
-        }
-      })
-    } else {
-      this.teams = this.teamsStored
-    }
-  },
-  watch: {
-    dialog(val) {
-      val || this.close()
-    },
-  },
-}
+  }
+}) 
 </script>
 <style lang="scss">
 tr {

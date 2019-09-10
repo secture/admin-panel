@@ -7,39 +7,40 @@
     :vertical="mode === 'vertical'"
   >
     {{$t(message.code)}}
-    <v-btn dark flat @click="snackBar = false">{{$t('actions.close')}}</v-btn>
+    <v-btn @click="snackBar = false" dark flat>{{$t('actions.close')}}</v-btn>
   </v-snackbar>
 </template>
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import store from '@/store'
 import { mapActions as mapActionsCore, mapGetters } from '@/store/modules/core'
 import * as coreGetters from '@/store/modules/core/getters'
 import * as coreTypes from '@/store/modules/core/types'
 
-export default {
+export default Vue.extend({
   data: () => ({
     timeout: 3000,
     mode: '',
   }),
-  methods: {
-    ...mapActionsCore({
-      clearSnackBarAction: coreTypes.CLEAR_TOASTER,
-    }),
-  },
   computed: {
     ...mapGetters({
       message: coreGetters.GET_MESSAGE,
     }),
     snackBar: {
       get() {
-        return store.state.core.showToaster
+        return store.getters['core/GET_TOASTER']
       },
       set(snackBar) {
         this.clearSnackBarAction(snackBar)
       },
     },
   },
-}
+  methods: {
+    ...mapActionsCore({
+      clearSnackBarAction: coreTypes.CLEAR_TOASTER,
+    }),
+  },
+})
 </script>
 
 <style>

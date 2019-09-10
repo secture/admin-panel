@@ -8,13 +8,14 @@
   </v-container>
 </template>
 
-<script>
-import LoginForm from '@/components/LoginForm'
+<script lang="ts">
+import Vue from 'vue'
+import LoginForm from '@/components/LoginForm.vue'
 
-export default {
+export default Vue.extend({
   components: {
     LoginForm,
   },
-}
+})
 </script>
 <style></style>

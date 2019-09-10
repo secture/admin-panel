@@ -56,16 +56,17 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { mapGetters, mapActions } from '@/store/modules/auth'
 import * as actions from '@/store/modules/auth/types'
 import * as authGet from '@/store/modules/auth/getters'
 import router from '@/router'
 
-import LanguageButton from '@/components/LanguageButton'
-import SnackBar from '@/components/SnackBar'
+import LanguageButton from '@/components/LanguageButton.vue'
+import SnackBar from '@/components/SnackBar.vue'
 
-export default {
+export default Vue.extend({
   components: {
     LanguageButton,
     SnackBar,
@@ -88,12 +89,21 @@ export default {
       cognitoUser: authGet.GET_COGNITO_USER,
     }),
   },
+  mounted() {
+    if (this.cognitoUser !== null) {
+      this.user = this.cognitoUser
+    } else {
+      this.authenticatedUser().then((authenticatedUser: any) => {
+        this.user = authenticatedUser
+      })
+    }
+  },
   methods: {
     ...mapActions({
       signOutUser: actions.LOGOUT,
       authenticatedUser: actions.GETAUTHENTICATEDUSER,
     }),
-    navigateTo(url) {
+    navigateTo(url: any) {
       router.push({ path: url })
     },
     signOut() {
@@ -102,16 +112,7 @@ export default {
       })
     },
   },
-  mounted() {
-    if (this.cognitoUser !== null) {
-      this.user = this.cognitoUser
-    } else {
-      this.authenticatedUser().then(authenticatedUser => {
-        this.user = authenticatedUser
-      })
-    }
-  },
-}
+})
 </script>
 <style lang="scss">
 .ml-300 {

@@ -8,13 +8,14 @@
   </v-container>
 </template>
 
-<script>
-import ResetPasswordForm from '@/components/ResetPasswordForm'
+<script lang="ts">
+import Vue from 'vue';
+import ResetPasswordForm from '@/components/ResetPasswordForm.vue'
 
-export default {
+export default Vue.extend({
   components: {
     ResetPasswordForm,
   },
-}
+})
 </script>
 <style></style>

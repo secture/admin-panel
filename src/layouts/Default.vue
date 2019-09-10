@@ -6,22 +6,19 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 import VeeValidate from 'vee-validate'
-import LanguageButton from '@/components/LanguageButton'
-import SnackBar from '@/components/SnackBar'
+import LanguageButton from '@/components/LanguageButton.vue'
+import SnackBar from '@/components/SnackBar.vue'
 import store from '@/store'
 
 Vue.use(VeeValidate)
 
-export default {
+export default Vue.extend({
   components: {
     LanguageButton,
     SnackBar,
-  },
-  mounted() {
-    this.$validator.localize('en', this.dictionary)
-  },
-}
+  }
+}) 
 </script>

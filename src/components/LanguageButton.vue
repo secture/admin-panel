@@ -15,16 +15,16 @@
         <v-icon>close</v-icon>
       </v-btn>
     </template>
-    <v-tooltip left color="primary" v-for="(language, i) in languages" :key="i">
+    <v-tooltip v-for="(language, i) in languages" :key="i" left color="primary">
       <template v-slot:activator="{ on }">
         <v-btn
+          v-on="on"
+          @click="changeLanguage(language.locale)"
           class="flag"
           fab
           dark
           small
           color="secondary_light"
-          @click="changeLanguage(language.locale)"
-          v-on="on"
         >{{ $t('flags.' + language.locale) }}</v-btn>
       </template>
       <span>{{ language.value }}</span>
@@ -32,7 +32,7 @@
   </v-speed-dial>
 </template>
 
-<script>
+<script lang="ts">
 import { i18n } from '@/plugins/i18n/main'
 
 export default {
@@ -53,7 +53,7 @@ export default {
     ],
   }),
   methods: {
-    changeLanguage(locale) {
+    changeLanguage(locale: any) {
       i18n.locale = locale
     },
   },

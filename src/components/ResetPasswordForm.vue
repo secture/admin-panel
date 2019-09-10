@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn @click="clear" icon large v-on="on">
+          <v-btn v-on="on" @click="clear" icon large>
             <v-icon large>refresh</v-icon>
           </v-btn>
         </template>
@@ -13,13 +13,13 @@
       </v-tooltip>
     </v-toolbar>
     <v-card-text>
-      <v-text-field class="pt-4" v-model="user.email" :label="$t('form.email')" required></v-text-field>
-      <v-text-field v-if="reset" class="pt-4" v-model="user.code" :label="$t('form.code')" required></v-text-field>
+      <v-text-field v-model="user.email" :label="$t('form.email')" class="pt-4" required></v-text-field>
+      <v-text-field v-if="reset" v-model="user.code" :label="$t('form.code')" class="pt-4" required></v-text-field>
       <v-text-field
         v-if="reset"
-        class="pt-4"
         v-model="user.newPassword"
         :label="$t('form.password')"
+        class="pt-4"
         required
       ></v-text-field>
     </v-card-text>
@@ -42,19 +42,22 @@
   </v-card>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import { mapActions, mapGetters } from '@/store/modules/auth'
 import * as auth from '@/store/modules/auth/getters'
 import * as actions from '@/store/modules/auth/types'
 import router from '@/router'
 
-export default {
+import { UserResetPassword } from '@/types'
+
+export default Vue.extend({
   data: () => ({
     user: {
       email: '',
       newPassword: '',
       code: '',
-    },
+    } as UserResetPassword,
   }),
   computed: {
     ...mapGetters({
@@ -73,7 +76,7 @@ export default {
     },
     resetPassword() {
       if (this.validateData() === true) {
-        this.resetPasswordCognito(this.user).then(resetPassword => {
+        this.resetPasswordCognito(this.user).then((resetPassword: any) => {
           if (resetPassword === true) {
             router.push({ path: '/login' })
           }
@@ -98,7 +101,7 @@ export default {
       router.push({ path: '/login' })
     },
   },
-}
+})
 </script>
 
 <style>

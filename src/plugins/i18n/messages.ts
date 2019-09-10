@@ -26,7 +26,6 @@ export const messages = {
     errors: {
       UserNotFoundException: 'User does not exist',
       NotAuthorizedException: 'Incorrect username or password.',
-      UserNotFoundException: 'Username/client id combination not found.',
       CodeMissmatchException: 'User code verification is not correct',
       InvalidPasswordException:
         'Password does not conform to policy: Password must have symbol characters',
@@ -72,7 +71,6 @@ export const messages = {
     errors: {
       UserNotFoundException: 'El usuario no existe',
       NotAuthorizedException: 'Nombre de usuario o password incorrectas',
-      UserNotFoundException: 'nombre de usuario incorrecto',
       CodeMissmatchException: 'El codigo de verificación no es correcto',
       InvalidPasswordException:
         'La password no es correcta: Debe contener al menos un caracter',

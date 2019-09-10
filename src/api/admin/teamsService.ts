@@ -3,7 +3,7 @@ import MessageService from '@/services/messageServices'
 
 const TeamsService = {
   getTeams: async function() {
-    let teams = null
+    let teams: any = null
     try {
       teams = await httpClient.get('api/v1/teams/admin/team-master')
     } catch (error) {
@@ -15,7 +15,7 @@ const TeamsService = {
     }
     return teams.data
   },
-  updateTeam: async function(team) {
+  updateTeam: async function(team: any) {
     let teamUpdated = null
     try {
       teamUpdated = await httpClient.put(

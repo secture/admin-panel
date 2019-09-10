@@ -3,8 +3,9 @@ import UserService from '@/api/cognito/userService'
 import MessageService from '@/services/messageServices'
 
 export default {
-  async [auth.LOGIN]({ commit }, user) {
-    const userCognito = await UserService.signIn(user)
+  async [auth.LOGIN]({ commit }: any, user: any) {
+    let userCognito: any = null
+    userCognito = await UserService.signIn(user)
     if (userCognito !== null && typeof userCognito !== 'undefined') {
       commit(auth.LOGIN, userCognito)
       commit(
@@ -24,13 +25,13 @@ export default {
     }
     return userCognito
   },
-  async [auth.LOGOUT]({ commit }) {
+  async [auth.LOGOUT]({ commit }: any) {
     const response = await UserService.signOut()
     commit(auth.SETUSERLOGGED, false)
     localStorage.removeItem('user-token')
     return response
   },
-  async [auth.GETAUTHENTICATEDUSER]({ commit }) {
+  async [auth.GETAUTHENTICATEDUSER]({ commit }: any) {
     const userAuthenticated = await UserService.getCurrentAuthenticatedUser()
     commit(auth.LOGIN, userAuthenticated)
     commit(
@@ -44,7 +45,7 @@ export default {
     )
     return userAuthenticated
   },
-  async [auth.FORGOT_PASSWORD]({ commit }, email) {
+  async [auth.FORGOT_PASSWORD]({ commit }: any, email: any) {
     try {
       const response = await UserService.forgotPassword(email)
       if (response !== null && typeof response !== 'undefined') {
@@ -60,7 +61,7 @@ export default {
       commit(auth.RESET_PASSWORD_OK, false)
     }
   },
-  async [auth.RESET_PASSWORD]({ commit }, user) {
+  async [auth.RESET_PASSWORD]({ commit }: any, user: any) {
     try {
       const response = await UserService.resetPassword(
         user.email,
@@ -75,6 +76,8 @@ export default {
           'success.'
         )
         return true
+      } else {
+        return false
       }
     } catch (error) {
       console.log(error)

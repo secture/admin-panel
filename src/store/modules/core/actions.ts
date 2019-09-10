@@ -1,10 +1,10 @@
 import * as core from '@/store/modules/core/types'
 
 export default {
-  [core.CLEAR_TOASTER]({ commit }, showToaster) {
+  [core.CLEAR_TOASTER]({ commit }: any, showToaster: any) {
     commit(core.CLEAR_TOASTER, showToaster)
   },
-  [core.SHOW_TOASTER_MESSAGE]({ commit }, { showToaster, message }) {
+  [core.SHOW_TOASTER_MESSAGE]({ commit }: any, { showToaster, message }: any) {
     if (message !== null || typeof message !== 'undefined') {
       commit(core.SHOW_TOASTER_MESSAGE, { showToaster, message })
     }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import UserService from '@/api/cognito/userService'
 
-async function requireAuth(to, from, next) {
+async function requireAuth(to: any, from: any, next: any) {
   const userAuth = await UserService.getCurrentAuthenticatedUser()
   if (typeof userAuth === 'undefined' || userAuth === null) {
     next({
