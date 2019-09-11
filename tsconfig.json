@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "noImplicitAny": false,
-    "skipLibCheck": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "strict": true,

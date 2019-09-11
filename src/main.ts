@@ -8,17 +8,16 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
+import { Auth } from 'aws-amplify'
+import CognitoConfig from '@/api/cognito/config'
+Auth.configure(CognitoConfig)
+
 import './registerServiceWorker'
 import { i18n } from '@/plugins/i18n/main'
 
 import Dashboard from '@/layouts/Dashboard.vue'
 import Default from '@/layouts/Default.vue'
 
-import Amplify, * as AmplifyModules from 'aws-amplify'
-import CognitoConfig from '@/api/cognito/config'
-
-Amplify.configure(CognitoConfig)
-Vue.use(AmplifyModules)
 Vue.config.productionTip = false
 
 Vue.component('dashboard-layout', Dashboard)
