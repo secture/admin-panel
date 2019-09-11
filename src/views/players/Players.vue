@@ -16,17 +16,14 @@
             >
               <template v-slot:items="props">
                 <td class="justify-center pa-2">
-                  <img :src="props.item.badgeColor" alt />
+                  <img :src="props.item.image96x96" alt />
                 </td>
-                <!--td class="text-start pa-2">{{ props.item.dspId }}</td>
                 <td class="text-start pa-2">{{ props.item.id }}</td>
                 <td class="text-start pa-2">{{ props.item.name }}</td>
-                <td class="text-start pa-2">{{ props.item.shortName }}</td>
-                <td class="text-start pa-2">{{ props.item.slug }}</td>
-                <td class="text-start pa-2">{{ props.item.store }}</td>
-                <td class="text-start pa-2">{{ props.item.badgeColor }}</td>
-                <td class="text-start pa-2">{{ props.item.badgeGray }}</td>
-                <td class="text-start pa-2">{{ props.item.badgeWhite }}</td>
+                <td class="text-start pa-2">{{ props.item.nickname }}</td>
+                <td class="text-start pa-2">{{ props.item.position }}</td>
+                <td class="text-start pa-2">{{ props.item.team.name }}</td>
+                <td class="text-start pa-2">{{ props.item.playerStatus }}</td>
                 <td class="text-start pa-2 layout">
                   {{ props.item.action }}
                   <v-btn icon class="mx-0" @click="editTeam(props.item)">
@@ -35,7 +32,7 @@
                   <v-btn icon class="mx-0" @click="deleteTeam(props.item)">
                     <v-icon color="pink">delete</v-icon>
                   </v-btn>
-                </td-->
+                </td>
               </template>
             </v-data-table>
           </v-card-text>
@@ -59,16 +56,13 @@ export default {
     return {
       title: 'Listado de jugadores',
       headers: [
-        { text: 'Shield', align: 'left', value: 'badgeColor' },
-        { text: 'dsp id', align: 'left', value: 'dspId' },
+        { text: 'image', align: 'left', value: 'image96x96' },
         { text: 'id', align: 'left', value: 'id' },
         { text: 'Name', align: 'left', value: 'name' },
-        { text: 'Short name', align: 'left', value: 'shortName' },
-        { text: 'Slug', align: 'left', value: 'slug' },
-        { text: 'Store', align: 'left', value: 'store' },
-        { text: 'Badge color', align: 'left', value: 'badgeColor' },
-        { text: 'Badge gray', align: 'left', value: 'badgeGray' },
-        { text: 'Badge white', align: 'left', value: 'badgeWhite' },
+        { text: 'Nickname', align: 'left', value: 'nickname' },
+        { text: 'Posición', align: 'left', value: 'position' },
+        { text: 'Equípo', align: 'left', value: 'team.name' },
+        { text: 'Estado', align: 'left', value: 'playerStatus' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
       players: {
