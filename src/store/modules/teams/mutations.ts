@@ -1,5 +1,5 @@
 import { MutationTree } from 'vuex'
-import { InfoTeams, Team } from '@/models/team'
+import { InfoTeams, Team } from '@/models/teams'
 import * as types from '@/store/modules/teams/types'
 
 export const mutations: MutationTree<InfoTeams> = {

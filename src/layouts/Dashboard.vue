@@ -25,7 +25,14 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-navigation-drawer v-model="drawer" absolute dark class="primary_dark">
+    <v-navigation-drawer
+      v-model="drawer"
+      expand-on-hover
+      absolute
+      dark
+      width="275"
+      class="primary_dark"
+    >
       <v-list class="pt-0 pb-0">
         <v-list-tile class="banner pt-2 pb-2">
           <v-avatar class="secondary ma-2">
@@ -46,7 +53,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-content :class="($vuetify.breakpoint.mdAndDown) ? 'ml-0' : 'ml-300'">
+    <v-content :class="($vuetify.breakpoint.mdAndDown) ? 'ml-0' : 'ml-275'">
       <transition name="fade" mode="out-in">
         <slot></slot>
       </transition>
@@ -110,8 +117,8 @@ export default class Dashboard extends Vue {
 }
 </script>
 <style lang="scss">
-.ml-300 {
-  margin-left: 300px;
+.ml-275 {
+  margin-left: 275px;
 }
 </style>
 

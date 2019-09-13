@@ -89,7 +89,7 @@ import * as getters from '@/store/modules/teams/getters'
 import * as types from '@/store/modules/teams/types'
 
 import { Action, Getter } from 'vuex-class'
-import { InfoTeams, DataTeams } from '@/models/team'
+import { InfoTeams, DataTeams } from '@/models/teams'
 const namespace: string = types.namespace
 
 @Component

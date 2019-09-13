@@ -1,5 +1,5 @@
 import { ActionTree } from 'vuex'
-import { InfoTeams, Team } from '@/models/team'
+import { InfoTeams, Team } from '@/models/teams'
 import { RootState } from '@/models/rootState'
 
 import * as types from '@/store/modules/teams/types'

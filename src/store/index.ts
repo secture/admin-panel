@@ -11,6 +11,7 @@ import state from './state'
 import { auth } from './modules/auth'
 import { core } from './modules/core'
 import { teams } from './modules/teams'
+import { players } from './modules/players'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ const store: StoreOptions<RootState> = {
     auth,
     core,
     teams,
+    players,
   },
 }
 

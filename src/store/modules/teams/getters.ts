@@ -1,6 +1,6 @@
 import { GetterTree } from 'vuex'
 import { RootState } from '@/models/rootState'
-import { InfoTeams } from '@/models/team'
+import { InfoTeams } from '@/models/teams'
 
 export const GET_DATA = 'GET_DATA'
 export const GET_CURRENT_TEAM = 'GET_CURRENT_TEAM'

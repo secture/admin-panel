@@ -1,6 +1,4 @@
-const NAMESPACE = 'players'
+export const namespace = 'players'
 
-const GET_PLAYERS = 'GET_PLAYERS'
-const SET_DATA = 'SET_DATA'
-
-export { NAMESPACE, GET_PLAYERS, SET_DATA }
+export const GET_PLAYERS = 'GET_PLAYERS'
+export const SET_DATA = 'SET_DATA'

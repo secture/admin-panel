@@ -1,13 +1,16 @@
-import * as types from '@/store/modules/players/types'
+import { ActionTree } from 'vuex'
+import { InfoPlayers } from '@/models/players'
+import { RootState } from '@/models/rootState'
 
-export default {
-  [types.SET_PLAYERS]({ commit }: any, players: any) {
-    commit(players.SET_PLAYERS, players)
-  },
-  [types.SET_CURRENT_PLAYER]({ commit }: any, player: any) {
-    if (player !== null || typeof player !== 'undefined') {
-      commit(types.SET_CURRENT_PLAYER, player)
+import * as types from '@/store/modules/players/types'
+import PlayersService from '@/api/admin/playersService'
+
+export const actions: ActionTree<InfoPlayers, RootState> = {
+  async [types.GET_PLAYERS]({ commit }): Promise<InfoPlayers> {
+    const data = await PlayersService.getPlayers()
+    if (data !== null && typeof data !== 'undefined') {
+      commit(types.SET_DATA, data)
     }
-    return player
+    return data
   },
 }

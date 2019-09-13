@@ -1,6 +1,6 @@
 import { Module } from 'vuex'
 import { RootState } from '@/models/rootState'
-import { InfoTeams } from '@/models/team'
+import { InfoTeams } from '@/models/teams'
 
 import { actions } from './actions'
 import { getters } from './getters'
