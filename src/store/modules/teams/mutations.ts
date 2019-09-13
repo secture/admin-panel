@@ -1,10 +1,12 @@
-import * as teams from '@/store/modules/teams/types'
+import { MutationTree } from 'vuex'
+import { InfoTeams, Team } from '@/models/team'
+import * as types from '@/store/modules/teams/types'
 
-export default {
-  [teams.SET_DATA](state: any, data: any) {
+export const mutations: MutationTree<InfoTeams> = {
+  [types.SET_DATA](state: any, data: InfoTeams) {
     state.data = data
   },
-  [teams.SET_CURRENT_TEAM](state: any, team: any) {
+  [types.SET_CURRENT_TEAM](state: any, team: Team) {
     state.currentTeam = team
   },
 }

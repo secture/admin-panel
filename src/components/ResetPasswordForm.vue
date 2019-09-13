@@ -43,65 +43,59 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { mapActions, mapGetters } from '@/store/modules/auth'
-import * as auth from '@/store/modules/auth/getters'
-import * as actions from '@/store/modules/auth/types'
+import { Component, Vue } from 'vue-property-decorator'
+import * as types from '@/store/modules/auth/types'
+import * as getters from '@/store/modules/auth/getters'
 import router from '@/router'
 
-import { UserResetPassword } from '@/types'
+import { Action, Getter } from 'vuex-class'
+import { Auth, UserResetPassword } from '@/models/auth'
+const namespace: string = types.namespace
 
-export default Vue.extend({
-  data: () => ({
-    user: {
-      email: '',
-      newPassword: '',
-      code: '',
-    } as UserResetPassword,
-  }),
-  computed: {
-    ...mapGetters({
-      reset: auth.GET_RESET_PASSWORD,
-    }),
-  },
-  methods: {
-    ...mapActions({
-      forgotPasswordCognito: actions.FORGOT_PASSWORD,
-      resetPasswordCognito: actions.RESET_PASSWORD,
-    }),
-    forgotPassword() {
-      if (this.user.email !== '') {
-        this.forgotPasswordCognito(this.user.email)
-      }
-    },
-    resetPassword() {
-      if (this.validateData() === true) {
-        this.resetPasswordCognito(this.user).then((resetPassword: any) => {
-          if (resetPassword === true) {
-            router.push({ path: '/login' })
-          }
-        })
-      }
-    },
-    validateData() {
-      if (
-        this.user.email !== '' &&
-        this.user.code !== '' &&
-        this.user.newPassword !== ''
-      ) {
-        return true
-      } else {
-        return false
-      }
-    },
-    clear() {
-      this.user.email = ''
-    },
-    backTo() {
-      router.push({ path: '/login' })
-    },
-  },
-})
+@Component
+export default class resetPasswordForm extends Vue {
+  @Action(types.FORGOT_PASSWORD, { namespace }) forgotPasswordCognito: any
+  @Action(types.RESET_PASSWORD, { namespace }) resetPasswordCognito: any
+  @Getter(getters.GET_RESET_PASSWORD, { namespace }) reset!: boolean
+
+  public user: UserResetPassword = {
+    email: '',
+    newPassword: '',
+    code: '',
+  }
+
+  forgotPassword(): void {
+    if (this.user.email !== '') {
+      this.forgotPasswordCognito(this.user.email)
+    }
+  }
+  resetPassword(): void {
+    if (this.validateData() === true) {
+      this.resetPasswordCognito(this.user).then((resetPassword: any) => {
+        if (resetPassword === true) {
+          router.push({ path: '/login' })
+        }
+      })
+    }
+  }
+  validateData(): boolean {
+    if (
+      this.user.email !== '' &&
+      this.user.code !== '' &&
+      this.user.newPassword !== ''
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+  clear(): void {
+    this.user.email = ''
+  }
+  backTo(): void {
+    router.push({ path: '/login' })
+  }
+}
 </script>
 
 <style>

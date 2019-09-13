@@ -33,30 +33,29 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import { i18n } from '@/plugins/i18n/main'
 
-export default {
-  data: () => ({
-    direction: 'top',
-    fab: false,
-    fling: false,
-    hover: true,
-    tabs: null,
-    top: false,
-    right: true,
-    bottom: true,
-    left: false,
-    transition: 'slide-x-transition',
-    languages: [
-      { value: 'Español', locale: 'es' },
-      { value: 'Inglés', locale: 'en' },
-    ],
-  }),
-  methods: {
-    changeLanguage(locale: any) {
-      i18n.locale = locale
-    },
-  },
+@Component
+export default class LanguageButton extends Vue {
+  public direction: string = 'top'
+  public fab: boolean = false
+  public fling: boolean = false
+  public hover: boolean = true
+  public tabs: any = null
+  public top: boolean = false
+  public right: boolean = true
+  public bottom: boolean = true
+  public left: boolean = false
+  public transition: string = 'slide-x-transition'
+  public languages: Array<any> = [
+    { value: 'Español', locale: 'es' },
+    { value: 'Inglés', locale: 'en' },
+  ]
+
+  public changeLanguage(locale: any) {
+    i18n.locale = locale
+  }
 }
 </script>
 

@@ -9,13 +9,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 import LoginForm from '@/components/LoginForm.vue'
 
-export default Vue.extend({
+@Component({
   components: {
     LoginForm,
   },
 })
+export default class Login extends Vue {}
 </script>
 <style></style>

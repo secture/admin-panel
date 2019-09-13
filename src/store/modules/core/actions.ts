@@ -1,12 +1,18 @@
-import * as core from '@/store/modules/core/types'
+import { ActionTree } from 'vuex'
+import { RootState } from '@/models/rootState'
+import { Core } from '@/models/core'
+import * as types from '@/store/modules/core/types'
 
-export default {
-  [core.CLEAR_TOASTER]({ commit }: any, showToaster: any) {
-    commit(core.CLEAR_TOASTER, showToaster)
+export const actions: ActionTree<Core, RootState> = {
+  [types.CLEAR_TOASTER]({ commit }: any, showToaster: boolean): void {
+    commit(types.CLEAR_TOASTER, showToaster)
   },
-  [core.SHOW_TOASTER_MESSAGE]({ commit }: any, { showToaster, message }: any) {
+  [types.SHOW_TOASTER_MESSAGE](
+    { commit }: any,
+    { showToaster, message }: any
+  ): void {
     if (message !== null || typeof message !== 'undefined') {
-      commit(core.SHOW_TOASTER_MESSAGE, { showToaster, message })
+      commit(types.SHOW_TOASTER_MESSAGE, { showToaster, message })
     }
   },
 }

@@ -1,7 +1,9 @@
-import * as core from '@/store/modules/core/types'
+import { MutationTree } from 'vuex'
+import { Core } from '@/models/core'
+import * as types from '@/store/modules/core/types'
 
-export default {
-  [core.CLEAR_TOASTER](state: any, showToaster: any) {
+export const mutations: MutationTree<Core> = {
+  [types.CLEAR_TOASTER](state: any, showToaster: any) {
     state.showToaster = showToaster
     state.message = {
       code: '',
@@ -9,7 +11,7 @@ export default {
       type: '',
     }
   },
-  [core.SHOW_TOASTER_MESSAGE](state: any, { showToaster, message }: any) {
+  [types.SHOW_TOASTER_MESSAGE](state: any, { showToaster, message }: any) {
     state.showToaster = showToaster
     state.message = {
       code: message.code,

@@ -1,23 +1,27 @@
-import * as auth from '@/store/modules/auth/types'
+import { MutationTree } from 'vuex'
+import { Auth } from '@/models/auth'
+import * as types from '@/store/modules/auth/types'
 
-export default {
-  [auth.LOGIN](state: any, cognitoUser: any) {
+export const mutations: MutationTree<Auth> = {
+  [types.LOGIN](state: any, cognitoUser: any) {
     state.cognitoUser = cognitoUser
+    state.cognitoToken = cognitoUser.signInUserSession.accessToken.jwtToken
     state.email = cognitoUser.attributes.email
     state.logged = true
   },
-  [auth.LOGOUT](state: any) {
+  [types.LOGOUT](state: any) {
+    state.cognitoUser = null
+    state.cognitoToken = null
     state.email = ''
     state.logged = false
-    state.cognitoUser = null
   },
-  [auth.SETCOGNITOTOKEN](state: any, cognitoToken: any) {
+  [types.SET_COGNITO_TOKEN](state: any, cognitoToken: string) {
     state.cognitoToken = cognitoToken
   },
-  [auth.SETUSERLOGGED](state: any, logged: any) {
+  [types.SET_USER_LOGGED](state: any, logged: any) {
     state.logged = logged
   },
-  [auth.RESET_PASSWORD_OK](state: any, resetPassword: any) {
+  [types.RESET_PASSWORD_OK](state: any, resetPassword: boolean) {
     state.resetPassword = resetPassword
   },
 }

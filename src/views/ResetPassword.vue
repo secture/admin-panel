@@ -9,13 +9,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { Component, Vue } from 'vue-property-decorator'
 import ResetPasswordForm from '@/components/ResetPasswordForm.vue'
 
-export default Vue.extend({
+@Component({
   components: {
     ResetPasswordForm,
   },
 })
+export default class ResetPassword extends Vue {}
 </script>
 <style></style>

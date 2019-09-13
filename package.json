@@ -22,7 +22,8 @@
     "vue-router": "^3.0.3",
     "vue-tslint": "^0.3.2",
     "vuetify": "^1.5.5",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.2"
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",

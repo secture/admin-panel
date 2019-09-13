@@ -57,38 +57,39 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapGetters, mapActions } from '@/store/modules/auth'
-import * as actions from '@/store/modules/auth/types'
-import * as authGet from '@/store/modules/auth/getters'
+import { Component, Vue } from 'vue-property-decorator'
+import * as types from '@/store/modules/auth/types'
+import * as getters from '@/store/modules/auth/getters'
 import router from '@/router'
+
+import { Action, Getter } from 'vuex-class'
+import { Auth, UserResetPassword } from '@/models/auth'
+const namespace: string = types.namespace
 
 import LanguageButton from '@/components/LanguageButton.vue'
 import SnackBar from '@/components/SnackBar.vue'
 
-export default Vue.extend({
+@Component({
   components: {
     LanguageButton,
     SnackBar,
   },
-  data() {
-    return {
-      drawer: null,
-      user: null,
-      items: [
-        { title: 'Inicio', icon: 'dashboard', url: '/' },
-        { title: 'Equipos', icon: 'shield', url: '/teams' },
-        { title: 'Jugadores', icon: 'people', url: '/players' },
-      ],
-    }
-  },
-  computed: {
-    ...mapGetters({
-      email: authGet.GET_EMAIL,
-      userLogged: authGet.GET_USER_LOGGED,
-      cognitoUser: authGet.GET_COGNITO_USER,
-    }),
-  },
+})
+export default class Dashboard extends Vue {
+  @Action(types.LOGOUT, { namespace }) signOutUser: any
+  @Action(types.GET_AUTHENTICATED_USER, { namespace }) authenticatedUser: any
+
+  @Getter(getters.GET_EMAIL, { namespace }) email!: string
+  @Getter(getters.GET_USER_LOGGED, { namespace }) userLogged!: boolean
+  @Getter(getters.GET_COGNITO_USER, { namespace }) cognitoUser!: any
+
+  public drawer: any = null
+  public user: any = null
+  public items: Array<any> = [
+    { title: 'Inicio', icon: 'dashboard', url: '/' },
+    { title: 'Equipos', icon: 'shield', url: '/teams' },
+    { title: 'Jugadores', icon: 'people', url: '/players' },
+  ]
   mounted() {
     if (this.cognitoUser !== null) {
       this.user = this.cognitoUser
@@ -97,22 +98,16 @@ export default Vue.extend({
         this.user = authenticatedUser
       })
     }
-  },
-  methods: {
-    ...mapActions({
-      signOutUser: actions.LOGOUT,
-      authenticatedUser: actions.GETAUTHENTICATEDUSER,
-    }),
-    navigateTo(url: any) {
-      router.push({ path: url })
-    },
-    signOut() {
-      this.signOutUser().then(() => {
-        router.push({ path: '/login' })
-      })
-    },
-  },
-})
+  }
+  navigateTo(url: any) {
+    router.push({ path: url })
+  }
+  signOut() {
+    this.signOutUser().then(() => {
+      router.push({ path: '/login' })
+    })
+  }
+}
 </script>
 <style lang="scss">
 .ml-300 {

@@ -1,19 +1,23 @@
-import * as teams from '@/store/modules/teams/types'
+import { ActionTree } from 'vuex'
+import { InfoTeams, Team } from '@/models/team'
+import { RootState } from '@/models/rootState'
+
+import * as types from '@/store/modules/teams/types'
 import TeamsService from '@/api/admin/teamsService'
 import MessageService from '@/services/messageServices'
 
-export default {
-  async [teams.GET_TEAMS]({ commit }: any) {
-    const data = await TeamsService.getTeams()
+export const actions: ActionTree<InfoTeams, RootState> = {
+  async [types.GET_TEAMS]({ commit }: any): Promise<InfoTeams> {
+    const data: InfoTeams = await TeamsService.getTeams()
     if (data !== null && typeof data !== 'undefined') {
-      commit(teams.SET_DATA, data)
+      commit(types.SET_DATA, data)
     }
     return data
   },
-  async [teams.UPDATE_TEAM]({ commit }: any, team: any) {
-    const teamUpdated = await TeamsService.updateTeam(team)
+  async [types.UPDATE_TEAM]({ commit }: any, team: any): Promise<Team> {
+    const teamUpdated: Team = await TeamsService.updateTeam(team)
     if (teamUpdated !== null && typeof teamUpdated !== 'undefined') {
-      commit(teams.SET_CURRENT_TEAM, teamUpdated)
+      commit(types.SET_CURRENT_TEAM, teamUpdated)
       MessageService.dispatchSuccess(
         'teamUpdated',
         'core/SHOW_TOASTER_MESSAGE',
@@ -24,9 +28,9 @@ export default {
       return null
     }
   },
-  [teams.SET_CURRENT_TEAM]({ commit }: any, team: any) {
+  [types.SET_CURRENT_TEAM]({ commit }: any, team: any): void {
     if (team !== null || typeof team !== 'undefined') {
-      commit(teams.SET_CURRENT_TEAM, team)
+      commit(types.SET_CURRENT_TEAM, team)
     }
   },
 }

@@ -84,99 +84,89 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {
-  mapActions as mapActionsTeams,
-  mapGetters as mapGettersTeams,
-} from '@/store/modules/teams'
-import * as teamsGetters from '@/store/modules/teams/getters'
-import * as actionsTeams from '@/store/modules/teams/types'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import * as getters from '@/store/modules/teams/getters'
+import * as types from '@/store/modules/teams/types'
 
-export default Vue.extend({
-  data() {
-    return {
-      title: 'Listado de equipos',
-      formTitle: 'Editar equipo',
-      search: '',
-      dialog: false,
-      headers: [
-        { text: 'Shield', align: 'left', value: 'badgeColor' },
-        { text: 'dsp id', align: 'left', value: 'dspId' },
-        { text: 'id', align: 'left', value: 'id' },
-        { text: 'Name', align: 'left', value: 'name' },
-        { text: 'Short name', align: 'left', value: 'shortName' },
-        { text: 'Slug', align: 'left', value: 'slug' },
-        { text: 'Store', align: 'left', value: 'store' },
-        { text: 'Badge color', align: 'left', value: 'badgeColor' },
-        { text: 'Badge gray', align: 'left', value: 'badgeGray' },
-        { text: 'Badge white', align: 'left', value: 'badgeWhite' },
-        { text: 'Actions', value: 'action', sortable: false },
-      ],
-      teams: {
-        page: 0,
-        pageSize: 0,
-        results: [],
-        totalResults: 0,
-      },
-      editedTeam: {
-        dspId: 0,
-        store: '',
-      },
-    }
-  },
-  computed: {
-    ...mapGettersTeams({
-      teamsStored: teamsGetters.GET_DATA,
-    }),
-  },
-  watch: {
-    dialog(val) {
-      val || this.close()
-    },
-  },
+import { Action, Getter } from 'vuex-class'
+import { InfoTeams, DataTeams } from '@/models/team'
+const namespace: string = types.namespace
+
+@Component
+export default class Teams extends Vue {
+  @Action(types.GET_TEAMS, { namespace }) getTeams: any
+  @Action(types.UPDATE_TEAM, { namespace }) updatedTeam: any
+  @Getter(getters.GET_DATA, { namespace }) dataTeams!: DataTeams
+
+  public title: string = 'Listado de equipos'
+  public formTitle: string = 'Editar equipo'
+  public search: string = ''
+  public dialog: boolean = false
+  public headers: Array<any> = [
+    { text: 'Shield', align: 'left', value: 'badgeColor' },
+    { text: 'dsp id', align: 'left', value: 'dspId' },
+    { text: 'id', align: 'left', value: 'id' },
+    { text: 'Name', align: 'left', value: 'name' },
+    { text: 'Short name', align: 'left', value: 'shortName' },
+    { text: 'Slug', align: 'left', value: 'slug' },
+    { text: 'Store', align: 'left', value: 'store' },
+    { text: 'Badge color', align: 'left', value: 'badgeColor' },
+    { text: 'Badge gray', align: 'left', value: 'badgeGray' },
+    { text: 'Badge white', align: 'left', value: 'badgeWhite' },
+    { text: 'Actions', value: 'action', sortable: false },
+  ]
+  public teams: DataTeams = {
+    page: 0,
+    pageSize: 0,
+    results: [],
+    totalResults: 0,
+  }
+  public editedTeam: any = {
+    dspId: 0,
+    store: '',
+  }
+
+  @Watch('dialog')
+  onDialogChange(value) {
+    value || this.close()
+  }
   mounted() {
-    if (this.teamsStored.results === null) {
+    if (this.dataTeams.results.length === 0) {
       this.getTeams().then((teamsMaster: any) => {
         if (teamsMaster !== null) {
           this.teams = teamsMaster
         }
       })
     } else {
-      this.teams = this.teamsStored
+      this.teams = this.dataTeams
     }
-  },
-  methods: {
-    ...mapActionsTeams({
-      getTeams: actionsTeams.GET_TEAMS,
-      updatedTeam: actionsTeams.UPDATE_TEAM,
-    }),
-    confirmEditTeam() {
-      this.updatedTeam(this.editedTeam).then((response: any) => {
-        if (response !== null) {
-          this.getTeams().then((teamsMaster: any) => {
-            if (teamsMaster !== null) {
-              this.teams = teamsMaster
-            }
-          })
-        }
-      })
-      this.close()
-    },
-
-    editTeam(team: any) {
-      this.editedTeam = Object.assign({}, team)
-      this.dialog = true
-    },
-
-    deleteTeam(team: any) {
-      console.log(team)
-    },
-
-    close() {
-      this.dialog = false
-    },
   }
-}) 
+  confirmEditTeam() {
+    this.updatedTeam(this.editedTeam).then((response: any) => {
+      if (response !== null) {
+        this.getTeams().then((teamsMaster: any) => {
+          if (teamsMaster !== null) {
+            this.teams = teamsMaster
+          }
+        })
+      }
+    })
+    this.close()
+  }
+
+  editTeam(team: any) {
+    this.editedTeam = Object.assign({}, team)
+    this.dialog = true
+  }
+
+  deleteTeam(team: any) {
+    console.log(team)
+  }
+
+  close() {
+    this.dialog = false
+  }
+}
 </script>
 <style lang="scss">
 tr {

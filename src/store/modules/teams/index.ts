@@ -1,15 +1,13 @@
-import { createNamespacedHelpers } from 'vuex'
+import { Module } from 'vuex'
+import { RootState } from '@/models/rootState'
+import { InfoTeams } from '@/models/team'
 
-import actions from './actions'
-import getters from './getters'
-import mutations from './mutations'
+import { actions } from './actions'
+import { getters } from './getters'
+import { mutations } from './mutations'
 import state from './state'
-import { NAMESPACE } from './types'
 
-const { mapState, mapGetters, mapActions } = createNamespacedHelpers(NAMESPACE)
-
-export { mapState, mapGetters, mapActions }
-export default {
+export const teams: Module<InfoTeams, RootState> = {
   namespaced: true,
   state,
   getters,

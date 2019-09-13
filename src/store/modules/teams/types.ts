@@ -1,8 +1,6 @@
-const NAMESPACE = 'teams'
+export const namespace = 'teams'
 
-const GET_TEAMS = 'GET_TEAMS'
-const SET_DATA = 'SET_DATA'
-const UPDATE_TEAM = 'UPDATE_TEAM'
-const SET_CURRENT_TEAM = 'SET_CURRENT_TEAM'
-
-export { NAMESPACE, GET_TEAMS, SET_DATA, UPDATE_TEAM, SET_CURRENT_TEAM }
+export const GET_TEAMS = 'GET_TEAMS'
+export const SET_DATA = 'SET_DATA'
+export const UPDATE_TEAM = 'UPDATE_TEAM'
+export const SET_CURRENT_TEAM = 'SET_CURRENT_TEAM'

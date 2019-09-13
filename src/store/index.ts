@@ -1,26 +1,29 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { StoreOptions } from 'vuex'
+import { RootState } from '@/models/rootState'
 
-import actions from './actions'
-import getters from './getters'
-import mutations from './mutations'
+import { actions } from './actions'
+import { getters } from './getters'
+import { mutations } from './mutations'
 import state from './state'
 
 //modules
-import authModule from './modules/auth'
-import coreModule from './modules/core'
-import teamsModule from './modules/teams'
+import { auth } from './modules/auth'
+import { core } from './modules/core'
+import { teams } from './modules/teams'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store: StoreOptions<RootState> = {
   state,
   getters,
   actions,
   mutations,
   modules: {
-    auth: authModule,
-    core: coreModule,
-    teams: teamsModule,
+    auth,
+    core,
+    teams,
   },
-})
+}
+
+export default new Vuex.Store<RootState>(store)

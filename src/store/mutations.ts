@@ -1,7 +1,9 @@
-import * as layouts from './types'
+import { MutationTree } from 'vuex'
+import * as types from './types'
+import { RootState } from '@/models/rootState'
 
-export default {
-  [layouts.SET_LAYOUT](state: any, newLayout: any) {
+export const mutations: MutationTree<RootState> = {
+  [types.SET_LAYOUT](state: any, newLayout: any) {
     state.layout = newLayout
   },
 }

@@ -45,61 +45,59 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { mapActions } from '@/store/modules/auth'
-import * as auth from '@/store/modules/auth/types'
+import { Component, Vue } from 'vue-property-decorator'
+import * as types from '@/store/modules/auth/types'
 import router from '@/router'
 export type VForm = Vue & { validate: () => boolean }
 
-import { User } from '@/types'
+import { State, Action } from 'vuex-class'
+import { User, Auth } from '@/models/auth'
+const namespace: string = types.namespace
 
-export default Vue.extend({
-  data: () => ({
-    valid: true,
-    lazy: false,
-    user: {
-      email: '',
-      password: '',
-    } as User,
-    emailRules: [
-      (value: any) => !!value || 'El email es requerido',
-      (value: any) => /.+@.+\..+/.test(value) || 'El email debe ser válido',
-    ],
-    passwordRules: [
-      (value: any) => !!value || 'Requerido',
-      (value: any) => (value && value.length >= 8) || 'Mínimo 8 caracteres',
-    ],
-    dictionary: {
-      attributes: {
-        email: 'E-mail Address',
-        password: 'Password',
-      },
+@Component
+export default class LoginForm extends Vue {
+  @State('auth') authState!: Auth
+  @Action(types.LOGIN, { namespace }) loginUser: any
+
+  public valid: boolean = true
+  public lazy: boolean = false
+
+  public user: User = {
+    email: '',
+    password: '',
+  }
+  public emailRules: Array<any> = [
+    (value: any) => !!value || 'El email es requerido',
+    (value: any) => /.+@.+\..+/.test(value) || 'El email debe ser válido',
+  ]
+  public passwordRules: Array<any> = [
+    (value: any) => !!value || 'Requerido',
+    (value: any) => (value && value.length >= 8) || 'Mínimo 8 caracteres',
+  ]
+  public dictionary: any = {
+    attributes: {
+      email: 'E-mail Address',
+      password: 'Password',
     },
-    showPassword: false,
-  }),
-  computed: {
-    form(): HTMLFormElement {
-      return this.$refs.form as HTMLFormElement
-    },
-  },
-  methods: {
-    ...mapActions({
-      loginUser: auth.LOGIN,
-    }),
-    submit() {
-      if (this.form.validate()) {
-        this['loginUser'](this.user).then((cognitoUser: any) => {
-          if (cognitoUser !== null) {
-            router.push({ path: '/' })
-          }
-        })
-      }
-    },
-    clear() {
-      this.form.reset()
-    },
-  },
-})
+  }
+  public showPassword: boolean = false
+
+  get form(): HTMLFormElement {
+    return this.$refs.form as HTMLFormElement
+  }
+  submit(): void {
+    if (this.form.validate()) {
+      this.loginUser(this.user).then((cognitoUser: any) => {
+        if (cognitoUser !== null) {
+          router.push({ path: '/' })
+        }
+      })
+    }
+  }
+  clear(): void {
+    this.form.reset()
+  }
+}
 </script>
 
 <style lang="scss">
