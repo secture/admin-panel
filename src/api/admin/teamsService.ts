@@ -1,5 +1,6 @@
 import { httpClient } from '../../services/http-common'
 import MessageService from '@/services/messageServices'
+import { Team } from '@/models/teams'
 
 const TeamsService = {
   getTeams: async function() {
@@ -15,7 +16,7 @@ const TeamsService = {
     }
     return teams.data
   },
-  updateTeam: async function(team: any) {
+  updateTeam: async function(team: Team) {
     let teamUpdated = null
     try {
       teamUpdated = await httpClient.put(

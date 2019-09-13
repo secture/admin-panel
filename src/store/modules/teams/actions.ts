@@ -14,7 +14,7 @@ export const actions: ActionTree<InfoTeams, RootState> = {
     }
     return data
   },
-  async [types.UPDATE_TEAM]({ commit }: any, team: any): Promise<Team> {
+  async [types.UPDATE_TEAM]({ commit }: any, team: Team): Promise<Team> {
     const teamUpdated: Team = await TeamsService.updateTeam(team)
     if (teamUpdated !== null && typeof teamUpdated !== 'undefined') {
       commit(types.SET_CURRENT_TEAM, teamUpdated)
@@ -28,7 +28,7 @@ export const actions: ActionTree<InfoTeams, RootState> = {
       return null
     }
   },
-  [types.SET_CURRENT_TEAM]({ commit }: any, team: any): void {
+  [types.SET_CURRENT_TEAM]({ commit }: any, team: Team): void {
     if (team !== null || typeof team !== 'undefined') {
       commit(types.SET_CURRENT_TEAM, team)
     }

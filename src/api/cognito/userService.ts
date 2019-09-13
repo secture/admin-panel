@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify'
 import MessageService from '@/services/messageServices'
 
 const UserService = {
-  signIn: async function(user: any) {
+  signIn: async function(user: { email: string; password: string }) {
     const username = user.email
     const password = user.password
     let userCognito = null
@@ -30,7 +30,7 @@ const UserService = {
       console.log(error)
     }
   },
-  forgotPassword: async function(userName: any) {
+  forgotPassword: async function(userName: string) {
     try {
       const response = await Auth.forgotPassword(userName)
       return response
@@ -43,7 +43,11 @@ const UserService = {
       )
     }
   },
-  resetPassword: async function(userName: any, code: any, newPassword: any) {
+  resetPassword: async function(
+    userName: string,
+    code: string,
+    newPassword: string
+  ) {
     try {
       await Auth.forgotPasswordSubmit(userName, code, newPassword)
       return true
