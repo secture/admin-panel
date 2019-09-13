@@ -1,12 +1,13 @@
-import * as players from '@/store/modules/players/types'
+import * as types from '@/store/modules/players/types'
 
 export default {
-  [players.SET_PLAYERS]({ commit } : any, players: any) {
+  [types.SET_PLAYERS]({ commit }: any, players: any) {
     commit(players.SET_PLAYERS, players)
   },
-  [players.SET_CURRENT_PLAYER]({ commit }: any, player: any) {
+  [types.SET_CURRENT_PLAYER]({ commit }: any, player: any) {
     if (player !== null || typeof player !== 'undefined') {
-      commit(players.SET_CURRENT_PLAYER, player)
+      commit(types.SET_CURRENT_PLAYER, player)
     }
+    return player
   },
 }

@@ -1,10 +1,10 @@
-import * as players from '@/store/modules/players/types'
+import * as types from '@/store/modules/players/types'
 
 export default {
-  [players.SET_PLAYERS](state: any, players: any) {
+  [types.SET_PLAYERS](state: any, players: any) {
     state.players = players
   },
-  [players.SET_CURRENT_PLAYER](state: any, player: any) {
+  [types.SET_CURRENT_PLAYER](state: any, player: any) {
     state.currentPlayer = player
   },
 }

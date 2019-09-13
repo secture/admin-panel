@@ -1,5 +1,4 @@
-export const GET_PLAYERS = 'GET_PLAYERS'
-export const GET_CURRENT_PLAYER = 'GET_CURRENT_PLAYER'
+export const GET_DATA = 'GET_DATA'
 
 export default {
   [GET_PLAYERS]: (state: any) => state.players,
