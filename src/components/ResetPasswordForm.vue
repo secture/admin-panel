@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn @click="clear" icon large v-on="on">
+          <v-btn v-on="on" @click="clear" icon large>
             <v-icon large>refresh</v-icon>
           </v-btn>
         </template>
@@ -13,13 +13,13 @@
       </v-tooltip>
     </v-toolbar>
     <v-card-text>
-      <v-text-field class="pt-4" v-model="user.email" :label="$t('form.email')" required></v-text-field>
-      <v-text-field v-if="reset" class="pt-4" v-model="user.code" :label="$t('form.code')" required></v-text-field>
+      <v-text-field v-model="user.email" :label="$t('form.email')" class="pt-4" required></v-text-field>
+      <v-text-field v-if="reset" v-model="user.code" :label="$t('form.code')" class="pt-4" required></v-text-field>
       <v-text-field
         v-if="reset"
-        class="pt-4"
         v-model="user.newPassword"
         :label="$t('form.password')"
+        class="pt-4"
         required
       ></v-text-field>
     </v-card-text>
@@ -42,62 +42,59 @@
   </v-card>
 </template>
 
-<script>
-import { mapActions, mapGetters } from '@/store/modules/auth'
-import * as auth from '@/store/modules/auth/getters'
-import * as actions from '@/store/modules/auth/types'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import * as types from '@/store/modules/auth/types'
+import * as getters from '@/store/modules/auth/getters'
 import router from '@/router'
 
-export default {
-  data: () => ({
-    user: {
-      email: '',
-      newPassword: '',
-      code: '',
-    },
-  }),
-  computed: {
-    ...mapGetters({
-      reset: auth.GET_RESET_PASSWORD,
-    }),
-  },
-  methods: {
-    ...mapActions({
-      forgotPasswordCognito: actions.FORGOT_PASSWORD,
-      resetPasswordCognito: actions.RESET_PASSWORD,
-    }),
-    forgotPassword() {
-      if (this.user.email !== '') {
-        this.forgotPasswordCognito(this.user.email)
-      }
-    },
-    resetPassword() {
-      if (this.validateData() === true) {
-        this.resetPasswordCognito(this.user).then(resetPassword => {
-          if (resetPassword === true) {
-            router.push({ path: '/login' })
-          }
-        })
-      }
-    },
-    validateData() {
-      if (
-        this.user.email !== '' &&
-        this.user.code !== '' &&
-        this.user.newPassword !== ''
-      ) {
-        return true
-      } else {
-        return false
-      }
-    },
-    clear() {
-      this.user.email = ''
-    },
-    backTo() {
-      router.push({ path: '/login' })
-    },
-  },
+import { Action, Getter } from 'vuex-class'
+import { Auth, UserResetPassword } from '@/models/auth'
+const namespace: string = types.namespace
+
+@Component
+export default class resetPasswordForm extends Vue {
+  @Action(types.FORGOT_PASSWORD, { namespace }) forgotPasswordCognito: any
+  @Action(types.RESET_PASSWORD, { namespace }) resetPasswordCognito: any
+  @Getter(getters.GET_RESET_PASSWORD, { namespace }) reset!: boolean
+
+  public user: UserResetPassword = {
+    email: '',
+    newPassword: '',
+    code: '',
+  }
+
+  forgotPassword(): void {
+    if (this.user.email !== '') {
+      this.forgotPasswordCognito(this.user.email)
+    }
+  }
+  resetPassword(): void {
+    if (this.validateData() === true) {
+      this.resetPasswordCognito(this.user).then((resetPassword: any) => {
+        if (resetPassword === true) {
+          router.push({ path: '/login' })
+        }
+      })
+    }
+  }
+  validateData(): boolean {
+    if (
+      this.user.email !== '' &&
+      this.user.code !== '' &&
+      this.user.newPassword !== ''
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+  clear(): void {
+    this.user.email = ''
+  }
+  backTo(): void {
+    router.push({ path: '/login' })
+  }
 }
 </script>
 

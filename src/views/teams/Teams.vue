@@ -26,8 +26,8 @@
             </v-card-text>
             <v-card-actions class="justify-self-end pa-4">
               <v-spacer></v-spacer>
-              <v-btn flat color="pink" text @click="close">Cancel</v-btn>
-              <v-btn dark color="teal" text @click="confirmEditTeam()">Save</v-btn>
+              <v-btn @click="close" flat color="pink" text>Cancel</v-btn>
+              <v-btn @click="confirmEditTeam()" dark color="teal" text>Save</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -67,10 +67,10 @@
                 <td class="text-start pa-2">{{ props.item.badgeWhite }}</td>
                 <td class="text-start pa-2 layout">
                   {{ props.item.action }}
-                  <v-btn icon class="mx-0" @click="editTeam(props.item)">
+                  <v-btn @click="editTeam(props.item)" icon class="mx-0">
                     <v-icon color="teal">edit</v-icon>
                   </v-btn>
-                  <v-btn icon class="mx-0" @click="deleteTeam(props.item)">
+                  <v-btn @click="deleteTeam(props.item)" icon class="mx-0">
                     <v-icon color="pink">delete</v-icon>
                   </v-btn>
                 </td>
@@ -83,98 +83,89 @@
   </v-container>
 </template>
 
-<script>
-import {
-  mapActions as mapActionsTeams,
-  mapGetters as mapGettersTeams,
-} from '@/store/modules/teams'
-import * as teamsGetters from '@/store/modules/teams/getters'
-import * as actionsTeams from '@/store/modules/teams/types'
+<script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import * as getters from '@/store/modules/teams/getters'
+import * as types from '@/store/modules/teams/types'
 
-export default {
-  data() {
-    return {
-      title: 'Listado de equipos',
-      formTitle: 'Editar equipo',
-      search: '',
-      dialog: false,
-      headers: [
-        { text: 'Shield', align: 'left', value: 'badgeColor' },
-        { text: 'dsp id', align: 'left', value: 'dspId' },
-        { text: 'id', align: 'left', value: 'id' },
-        { text: 'Name', align: 'left', value: 'name' },
-        { text: 'Short name', align: 'left', value: 'shortName' },
-        { text: 'Slug', align: 'left', value: 'slug' },
-        { text: 'Store', align: 'left', value: 'store' },
-        { text: 'Badge color', align: 'left', value: 'badgeColor' },
-        { text: 'Badge gray', align: 'left', value: 'badgeGray' },
-        { text: 'Badge white', align: 'left', value: 'badgeWhite' },
-        { text: 'Actions', value: 'action', sortable: false },
-      ],
-      teams: {
-        page: 0,
-        pageSize: 0,
-        results: [],
-        totalResults: 0,
-      },
-      editedTeam: {
-        dspId: 0,
-        store: '',
-      },
-    }
-  },
-  computed: {
-    ...mapGettersTeams({
-      teamsStored: teamsGetters.GET_DATA,
-    }),
-  },
-  methods: {
-    ...mapActionsTeams({
-      getTeams: actionsTeams.GET_TEAMS,
-      updatedTeam: actionsTeams.UPDATE_TEAM,
-    }),
-    confirmEditTeam() {
-      this.updatedTeam(this.editedTeam).then(response => {
-        if (response !== null) {
-          this.getTeams().then(teamsMaster => {
-            if (teamsMaster !== null) {
-              this.teams = teamsMaster
-            }
-          })
-        }
-      })
-      this.close()
-    },
+import { Action, Getter } from 'vuex-class'
+import { InfoTeams, DataTeams } from '@/models/teams'
+const namespace: string = types.namespace
 
-    editTeam(team) {
-      this.editedTeam = Object.assign({}, team)
-      this.dialog = true
-    },
+@Component
+export default class Teams extends Vue {
+  @Action(types.GET_TEAMS, { namespace }) getTeams: any
+  @Action(types.UPDATE_TEAM, { namespace }) updatedTeam: any
+  @Getter(getters.GET_DATA, { namespace }) dataTeams!: DataTeams
 
-    deleteTeam(team) {
-      console.log(team)
-    },
+  public title: string = 'Listado de equipos'
+  public formTitle: string = 'Editar equipo'
+  public search: string = ''
+  public dialog: boolean = false
+  public headers: Array<any> = [
+    { text: 'Shield', align: 'left', value: 'badgeColor' },
+    { text: 'dsp id', align: 'left', value: 'dspId' },
+    { text: 'id', align: 'left', value: 'id' },
+    { text: 'Name', align: 'left', value: 'name' },
+    { text: 'Short name', align: 'left', value: 'shortName' },
+    { text: 'Slug', align: 'left', value: 'slug' },
+    { text: 'Store', align: 'left', value: 'store' },
+    { text: 'Badge color', align: 'left', value: 'badgeColor' },
+    { text: 'Badge gray', align: 'left', value: 'badgeGray' },
+    { text: 'Badge white', align: 'left', value: 'badgeWhite' },
+    { text: 'Actions', value: 'action', sortable: false },
+  ]
+  public teams: DataTeams = {
+    page: 0,
+    pageSize: 0,
+    results: [],
+    totalResults: 0,
+  }
+  public editedTeam: any = {
+    dspId: 0,
+    store: '',
+  }
 
-    close() {
-      this.dialog = false
-    },
-  },
+  @Watch('dialog')
+  onDialogChange(value) {
+    value || this.close()
+  }
   mounted() {
-    if (this.teamsStored.results === null) {
-      this.getTeams().then(teamsMaster => {
+    if (this.dataTeams.results.length === 0) {
+      this.getTeams().then((teamsMaster: any) => {
         if (teamsMaster !== null) {
           this.teams = teamsMaster
         }
       })
     } else {
-      this.teams = this.teamsStored
+      this.teams = this.dataTeams
     }
-  },
-  watch: {
-    dialog(val) {
-      val || this.close()
-    },
-  },
+  }
+  confirmEditTeam() {
+    this.updatedTeam(this.editedTeam).then((response: any) => {
+      if (response !== null) {
+        this.getTeams().then((teamsMaster: any) => {
+          if (teamsMaster !== null) {
+            this.teams = teamsMaster
+          }
+        })
+      }
+    })
+    this.close()
+  }
+
+  editTeam(team: any) {
+    this.editedTeam = Object.assign({}, team)
+    this.dialog = true
+  }
+
+  deleteTeam(team: any) {
+    console.log(team)
+  }
+
+  close() {
+    this.dialog = false
+  }
 }
 </script>
 <style lang="scss">

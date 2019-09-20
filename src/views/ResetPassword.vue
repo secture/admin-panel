@@ -8,13 +8,15 @@
   </v-container>
 </template>
 
-<script>
-import ResetPasswordForm from '@/components/ResetPasswordForm'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import ResetPasswordForm from '@/components/ResetPasswordForm.vue'
 
-export default {
+@Component({
   components: {
     ResetPasswordForm,
   },
-}
+})
+export default class ResetPassword extends Vue {}
 </script>
 <style></style>
