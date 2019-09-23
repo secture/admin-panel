@@ -7,8 +7,6 @@ export const messages = {
       password: 'Password',
       submit: 'Submit',
       back: 'Back',
-      cancel: 'Cancel',
-      save: 'Save',
       edit: 'Edit',
       delete: 'Delete',
       forgot_password: 'I forgot the password',
@@ -24,6 +22,8 @@ export const messages = {
     },
     actions: {
       close: 'Close',
+      save: 'Save',
+      cancel: 'Cancel',
     },
     flags: {
       es: '🇪🇸',
@@ -71,8 +71,6 @@ export const messages = {
       password: 'Contraseña',
       submit: 'Aceptar',
       back: 'Atrás',
-      cancel: 'Cancelar',
-      save: 'Guardar',
       edit: 'Editar',
       delete: 'Borrar',
       forgot_password: 'He olvidado la contraseña',
@@ -88,6 +86,8 @@ export const messages = {
     },
     actions: {
       close: 'Cerrar',
+      save: 'Guardar',
+      cancel: 'Cancelar',
     },
     flags: {
       es: '🇪🇸',

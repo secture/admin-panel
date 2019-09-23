@@ -26,8 +26,8 @@
             </v-card-text>
             <v-card-actions class="justify-self-end pa-4">
               <v-spacer></v-spacer>
-              <v-btn @click="close" flat color="pink" text>{{$t('form.cancel')}}</v-btn>
-              <v-btn @click="confirmEditTeam()" dark color="teal" text>{{$t('form.save')}}</v-btn>
+              <v-btn @click="close" flat color="pink" text>{{$t('actions.cancel')}}</v-btn>
+              <v-btn @click="confirmEditTeam()" dark color="teal" text>{{$t('actions.save')}}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

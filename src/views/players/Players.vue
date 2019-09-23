@@ -19,8 +19,8 @@
                         </v-card-text>
                         <v-card-actions class="justify-self-end pa-4">
                             <v-spacer></v-spacer>
-                            <v-btn flat color="pink" text @click="close">Cancel</v-btn>
-                            <v-btn dark color="teal" text @click="confirmEditPlayer()">Save</v-btn>
+                            <v-btn flat color="pink" text @click="close">{{$t('actions.close')}}</v-btn>
+                            <v-btn dark color="teal" text @click="confirmEditPlayer()">{{$t('actions.save')}}</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
