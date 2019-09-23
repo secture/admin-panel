@@ -26,7 +26,7 @@
                 </v-dialog>
                 <v-card>
                     <v-card-title class="d-flex justify-space-around">
-                        <span class="headline">{{ title }}</span>
+                        <span class="headline">{{$t(title)}}</span>
                         <v-text-field
                                 v-model="search"
                                 append-icon="search"
@@ -78,6 +78,7 @@
 
   import { Action, Getter } from 'vuex-class'
   import { InfoPlayers, DataPlayers } from '@/models/players'
+  import { TranslateResult } from 'vue-i18n'
 
   const namespace: string = types.namespace
 
@@ -87,7 +88,7 @@
     @Action(types.UPDATE_PLAYER, { namespace }) updatedPlayer: any
     @Getter(getters.GET_DATA, { namespace }) playersStored!: DataPlayers
 
-    public title: string = 'Listado de jugadores'
+    public title: string = 'players.listPlayers'
     public formTitle: string = 'Buscar equipo'
     public search: string = ''
     public dialog: boolean = false

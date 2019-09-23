@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar flat dark class="primary_dark">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>title prueba</v-toolbar-title>
+      <v-toolbar-title>XXX</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat>
@@ -48,7 +48,7 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ $t(item.title) }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -70,7 +70,6 @@ import * as getters from '@/store/modules/auth/getters'
 import router from '@/router'
 
 import { Action, Getter } from 'vuex-class'
-import { Auth, UserResetPassword } from '@/models/auth'
 const namespace: string = types.namespace
 
 import LanguageButton from '@/components/LanguageButton.vue'
@@ -93,9 +92,9 @@ export default class Dashboard extends Vue {
   public drawer: any = null
   public user: any = null
   public items: Array<any> = [
-    { title: 'Inicio', icon: 'dashboard', url: '/' },
-    { title: 'Equipos', icon: 'shield', url: '/teams' },
-    { title: 'Jugadores', icon: 'people', url: '/players' },
+    { title: 'dashboard.home', icon: 'dashboard', url: '/' },
+    { title: 'dashboard.teams', icon: 'shield', url: '/teams' },
+    { title: 'dashboard.players', icon: 'people', url: '/players' },
   ]
   mounted() {
     if (this.cognitoUser !== null) {
