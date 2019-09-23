@@ -19,8 +19,8 @@
                         </v-card-text>
                         <v-card-actions class="justify-self-end pa-4">
                             <v-spacer></v-spacer>
-                            <v-btn flat color="pink" text @click="close">{{$t('actions.close')}}</v-btn>
-                            <v-btn dark color="teal" text @click="confirmEditPlayer()">{{$t('actions.save')}}</v-btn>
+                            <v-btn @click="close" flat color="pink" text>{{$t('actions.close')}}</v-btn>
+                            <v-btn @click="confirmEditPlayer()" dark color="teal" text>{{$t('actions.save')}}</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -41,7 +41,7 @@
                                 :headers="headers"
                                 :items="players.results"
                                 :loading="players.results.length === 0"
-                                loading-text="Cargando jugadores"
+                                loading-text="$t('players.loadPlayers')"
                                 class="elevation-1"
                         >
                             <template v-slot:items="props">
@@ -56,11 +56,11 @@
                                 <td class="text-start pa-2">{{ props.item.playerStatus }}</td>
                                 <td class="text-start pa-2 layout">
                                     {{ props.item.action }}
-                                    <v-btn icon class="mx-0" @click="editPlayer(props.item)">
-                                        <v-icon color="teal">edit</v-icon>
+                                    <v-btn @click="editPlayer(props.item)" icon class="mx-0">
+                                        <v-icon color="teal">{{$(actions.edit)}}</v-icon>
                                     </v-btn>
-                                    <v-btn icon class="mx-0" @click="deletePlayer(props.item)">
-                                        <v-icon color="pink">delete</v-icon>
+                                    <v-btn @click="deletePlayer(props.item)" icon class="mx-0">
+                                        <v-icon color="pink">{{$(actions.delete)}}</v-icon>
                                     </v-btn>
                                 </td>
                             </template>

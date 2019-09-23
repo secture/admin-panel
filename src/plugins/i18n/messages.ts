@@ -7,8 +7,6 @@ export const messages = {
       password: 'Password',
       submit: 'Submit',
       back: 'Back',
-      edit: 'Edit',
-      delete: 'Delete',
       forgot_password: 'I forgot the password',
       refresh: 'Refresh form',
       reset: 'Reset password',
@@ -24,6 +22,8 @@ export const messages = {
       close: 'Close',
       save: 'Save',
       cancel: 'Cancel',
+      edit: 'Edit',
+      delete: 'Delete',
     },
     flags: {
       es: '🇪🇸',
@@ -56,6 +56,7 @@ export const messages = {
       playerUpdated: 'Player updated',
       listPlayers: 'List of players',
       editPlayers: 'Edit players',
+      loadPlayers: 'Loading players',
     },
     dashboard: {
       home: 'Home',
@@ -88,6 +89,8 @@ export const messages = {
       close: 'Cerrar',
       save: 'Guardar',
       cancel: 'Cancelar',
+      edit: 'Editar',
+      delete: 'Borrar',
     },
     flags: {
       es: '🇪🇸',
@@ -120,6 +123,7 @@ export const messages = {
       playerUpdated: 'Jugador editado',
       listPlayers: 'Listado de jugadores',
       editPlayers: 'Editar jugadores',
+      loadPlayers: 'Cargando jugadores',
     },
     dashboard: {
       home: 'Inicio',

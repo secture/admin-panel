@@ -68,10 +68,10 @@
                 <td class="text-start pa-2 layout">
                   {{ props.item.action }}
                   <v-btn @click="editTeam(props.item)" icon class="mx-0">
-                    <v-icon color="teal">{{$t('form.edit')}}</v-icon>
+                    <v-icon color="teal">{{$t('actions.edit')}}</v-icon>
                   </v-btn>
                   <v-btn @click="deleteTeam(props.item)" icon class="mx-0">
-                    <v-icon color="pink">{{$t('form.delete')}}</v-icon>
+                    <v-icon color="pink">{{$t('actions.delete')}}</v-icon>
                   </v-btn>
                 </td>
               </template>
