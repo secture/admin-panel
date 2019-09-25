@@ -79,15 +79,9 @@ export default class resetPasswordForm extends Vue {
     }
   }
   validateData(): boolean {
-    if (
-      this.user.email !== '' &&
+    return this.user.email !== '' &&
       this.user.code !== '' &&
-      this.user.newPassword !== ''
-    ) {
-      return true
-    } else {
-      return false
-    }
+      this.user.newPassword !== '';
   }
   clear(): void {
     this.user.email = ''

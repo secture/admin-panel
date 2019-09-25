@@ -13,11 +13,17 @@ export const messages = {
       code: 'Verification code',
       rules: {
         required: 'Required',
+        emailRequired: 'Email required',
+        emailMustBeValid: 'The email must be valid',
         characters: 'Min 8 characters',
       },
     },
     actions: {
       close: 'Close',
+      save: 'Save',
+      cancel: 'Cancel',
+      edit: 'Edit',
+      delete: 'Delete',
     },
     flags: {
       es: '🇪🇸',
@@ -31,6 +37,7 @@ export const messages = {
         'Password does not conform to policy: Password must have symbol characters',
       GetTeamsMaster: 'An error has occurred when retrieve teams',
       UpdateTeamMaster: 'n error has occurred when updated the team',
+      passwordPassRestriction: 'the password meets the restrictions',
     },
     success: {
       UserLogin: 'Success user logged',
@@ -42,6 +49,19 @@ export const messages = {
     },
     teams: {
       teamUpdated: 'Team updated',
+      listTeams: 'List of teams',
+      editTeams: 'Edit teams',
+    },
+    players: {
+      playerUpdated: 'Player updated',
+      listPlayers: 'List of players',
+      editPlayers: 'Edit players',
+      loadPlayers: 'Loading players',
+    },
+    dashboard: {
+      home: 'Home',
+      teams: 'Teams',
+      players: 'Players',
     },
   },
   es: {
@@ -52,17 +72,25 @@ export const messages = {
       password: 'Contraseña',
       submit: 'Aceptar',
       back: 'Atrás',
+      edit: 'Editar',
+      delete: 'Borrar',
       forgot_password: 'He olvidado la contraseña',
       refresh: 'Limpiar formulario',
       reset: 'Cambiar contraseña',
       code: 'Código de verificación',
       rules: {
         required: 'Requerido',
+        emailRequired: 'El email es requerido',
+        emailMustBeValid: 'El email debe ser válido',
         characters: 'Mínimo 8 caracteres',
       },
     },
     actions: {
       close: 'Cerrar',
+      save: 'Guardar',
+      cancel: 'Cancelar',
+      edit: 'Editar',
+      delete: 'Borrar',
     },
     flags: {
       es: '🇪🇸',
@@ -76,6 +104,7 @@ export const messages = {
         'La password no es correcta: Debe contener al menos un caracter',
       GetTeamsMaster: 'Ha ocurrido un error al obtener los equipos',
       UpdateTeamMaster: 'Ha ocurrido un error al actualizar el equipo',
+      passwordPassRestriction: 'la contraseña cumple las restricciones',
     },
     success: {
       UserLogin: 'Usuario logeado con éxito',
@@ -87,6 +116,19 @@ export const messages = {
     },
     teams: {
       teamUpdated: 'Equipo editado',
+      listTeams: 'Listado de equipos',
+      editTeams: 'Editar equipos',
+    },
+    players: {
+      playerUpdated: 'Jugador editado',
+      listPlayers: 'Listado de jugadores',
+      editPlayers: 'Editar jugadores',
+      loadPlayers: 'Cargando jugadores',
+    },
+    dashboard: {
+      home: 'Inicio',
+      teams: 'Equipos',
+      players: 'Jugadores',
     },
   },
 }

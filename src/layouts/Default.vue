@@ -11,7 +11,6 @@ import Vue from 'vue'
 import VeeValidate from 'vee-validate'
 import LanguageButton from '@/components/LanguageButton.vue'
 import SnackBar from '@/components/SnackBar.vue'
-import store from '@/store'
 
 Vue.use(VeeValidate)
 
@@ -20,5 +19,5 @@ export default Vue.extend({
     LanguageButton,
     SnackBar,
   }
-}) 
+})
 </script>

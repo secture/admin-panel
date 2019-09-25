@@ -5,7 +5,7 @@
         <v-dialog v-model="dialog" max-width="40em">
           <v-card>
             <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
+              <span class="headline">{{$t('teams.editTeams')}}</span>
             </v-card-title>
             <v-card-text class="px-0">
               <v-container>
@@ -26,14 +26,14 @@
             </v-card-text>
             <v-card-actions class="justify-self-end pa-4">
               <v-spacer></v-spacer>
-              <v-btn @click="close" flat color="pink" text>Cancel</v-btn>
-              <v-btn @click="confirmEditTeam()" dark color="teal" text>Save</v-btn>
+              <v-btn @click="close" flat color="pink" text>{{$t('actions.cancel')}}</v-btn>
+              <v-btn @click="confirmEditTeam()" dark color="teal" text>{{$t('actions.save')}}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
         <v-card>
           <v-card-title class="d-flex justify-space-around">
-            <span class="headline">{{ title }}</span>
+            <span class="headline">{{$t('teams.listTeams')}}</span>
             <v-text-field
               v-model="search"
               append-icon="search"
@@ -68,10 +68,10 @@
                 <td class="text-start pa-2 layout">
                   {{ props.item.action }}
                   <v-btn @click="editTeam(props.item)" icon class="mx-0">
-                    <v-icon color="teal">edit</v-icon>
+                    <v-icon color="teal">{{$t('actions.edit')}}</v-icon>
                   </v-btn>
                   <v-btn @click="deleteTeam(props.item)" icon class="mx-0">
-                    <v-icon color="pink">delete</v-icon>
+                    <v-icon color="pink">{{$t('actions.delete')}}</v-icon>
                   </v-btn>
                 </td>
               </template>
@@ -98,8 +98,6 @@ export default class Teams extends Vue {
   @Action(types.UPDATE_TEAM, { namespace }) updatedTeam: any
   @Getter(getters.GET_DATA, { namespace }) dataTeams!: DataTeams
 
-  public title: string = 'Listado de equipos'
-  public formTitle: string = 'Editar equipo'
   public search: string = ''
   public dialog: boolean = false
   public headers: Array<any> = [
