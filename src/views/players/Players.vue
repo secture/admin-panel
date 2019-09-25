@@ -57,10 +57,10 @@
                                 <td class="text-start pa-2 layout">
                                     {{ props.item.action }}
                                     <v-btn @click="editPlayer(props.item)" icon class="mx-0">
-                                        <v-icon color="teal">{{$(actions.edit)}}</v-icon>
+                                        <v-icon color="teal">edit</v-icon>
                                     </v-btn>
                                     <v-btn @click="deletePlayer(props.item)" icon class="mx-0">
-                                        <v-icon color="pink">{{$(actions.delete)}}</v-icon>
+                                        <v-icon color="pink">delete</v-icon>
                                     </v-btn>
                                 </td>
                             </template>
@@ -78,7 +78,6 @@
 
   import { Action, Getter } from 'vuex-class'
   import { InfoPlayers, DataPlayers } from '@/models/players'
-  import { TranslateResult } from 'vue-i18n'
 
   const namespace: string = types.namespace
 
