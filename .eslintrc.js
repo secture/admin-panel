@@ -7,10 +7,12 @@ module.exports = {
 
   extends: [
     'plugin:vue/essential',
+    "plugin:vue/strongly-recommended",
     'eslint:recommended',
     'plugin:vue/recommended',
     'prettier',
     'prettier/vue',
+    '@vue/typescript'
   ],
 
   rules: {
@@ -25,13 +27,4 @@ module.exports = {
   },
 
   plugins: ['vue'],
-
-  'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended',
-    'plugin:vue/recommended',
-    'prettier',
-    'prettier/vue',
-    '@vue/typescript'
-  ]
 }

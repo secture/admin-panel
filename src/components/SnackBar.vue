@@ -6,8 +6,8 @@
     :timeout="timeout"
     :vertical="mode === 'vertical'"
   >
-    {{$t(message.code)}}
-    <v-btn @click="snackBar = false" dark flat>{{$t('actions.close')}}</v-btn>
+    {{this.$root.$t(message.code)}}
+    <v-btn @click="snackBar = false" dark flat>{{this.$root.$t('actions.close')}}</v-btn>
   </v-snackbar>
 </template>
 <script lang="ts">
