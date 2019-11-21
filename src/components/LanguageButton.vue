@@ -25,7 +25,7 @@
           dark
           small
           color="secondary_light"
-        >{{ $t('flags.' + language.locale) }}</v-btn>
+        >{{ this.$root.$t('flags.' + language.locale) }}</v-btn>
       </template>
       <span>{{ language.value }}</span>
     </v-tooltip>

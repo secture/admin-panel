@@ -13,7 +13,7 @@ import CognitoConfig from '@/api/cognito/config'
 Auth.configure(CognitoConfig)
 
 import './registerServiceWorker'
-import { i18n } from '@/plugins/i18n/main'
+import {i18n} from '@/plugins/i18n/main'
 
 import Dashboard from '@/layouts/Dashboard.vue'
 import Default from '@/layouts/Default.vue'
