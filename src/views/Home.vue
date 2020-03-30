@@ -1,17 +1,18 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <v-container fluid>
+    <v-layout align-center justify-center>
+      <v-flex xs12>
+        <h1>{{$t('dashboard.home')}}</h1>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from '@/components/HelloWorld.vue'
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
-  components: {
-    HelloWorld,
-  },
+
 })
 export default class Home extends Vue {}
 </script>

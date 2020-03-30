@@ -1,25 +1,63 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import UserService from '@/api/cognito/userService'
+
+async function requireAuth(to: any, from: any, next: any) {
+  const userAuth = await UserService.getCurrentAuthenticatedUser()
+  if (typeof userAuth === 'undefined' || userAuth === null) {
+    next({
+      path: '/login',
+    })
+  } else {
+    next()
+  }
+}
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'Home',
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/Home.vue').default,
+      beforeEnter: requireAuth,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/login',
+      meta: { layout: 'default-layout' },
+      component: require('@/views/Login.vue').default,
     },
+    {
+      path: '/reset-password',
+      meta: { layout: 'default-layout' },
+      component: require('@/views/ResetPassword.vue').default,
+    },
+    {
+      path: '/teams',
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/teams/Teams.vue').default,
+      beforeEnter: requireAuth,
+    },
+    {
+      path: '/players',
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/players/Players.vue').default,
+      beforeEnter: requireAuth,
+    },
+    {
+      path: '/logout',
+      meta: { layout: 'dashboard-layout' },
+      component: require('@/views/Home.vue').default,
+    },
+    /*{
+      path: '/error',
+      component: ErrorComponent,
+    },*/
   ],
 })
+
+export default router
